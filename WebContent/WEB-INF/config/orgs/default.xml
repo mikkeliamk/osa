@@ -1,0 +1,2264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config version="4">
+    
+    <!-- LAYOUT
+        Sets organization specific title, css, logo and header files.
+        
+        applicationTitle:   Text that is shown in the browser window's title
+        cssFile:            Organization specific css file for styles. Absolute path starting from WebContent's root 
+        logoFile:           Image that is shown on the main page header
+            alt:            Alternative text to show in case the image cannot be displayed
+        headerJsp           Header jsp files for main and sub pages. 
+                            If these are omitted, application defaults mainPage to "/layout/osa_header_main.jsp" and subPage to "/layout/osa_header.jsp", respectively.
+            mainPage:       Absolute (starting from WebContent's root) path to main page's header file
+            subPage:        Absolute (starting from WebContent's root) path to sub pages' header file
+    -->
+    <layout name="default">
+        <applicationTitle>OSA Web Client</applicationTitle>
+        <cssFile>css/osa.css</cssFile>
+        <logoFile alt="OSA">osalogo_final.png</logoFile>
+        <headerJsp>
+            <mainPage>/layout/osa_header_main.jsp</mainPage>
+            <subPage>/layout/osa_header.jsp</subPage>
+        </headerJsp>
+    </layout> 
+
+    <!-- LOCALIZATION
+        Documentation here.
+    -->
+    <locales>
+        <locale id="fi-FI" default="true" />
+        <locale id="en-US" />
+    </locales>
+    <languages>
+      	<language id="fi-FI" name="Suomi" default="true" />
+      	<language id="en-US" name="English (United States)" />
+    </languages>    
+    
+    <!-- APPLICATION CONFIGURATION 
+        Upload determines how many files can be uploaded per queue. Under work.
+    -->
+    <upload>
+        <queue size="10"/>
+    </upload>
+    
+    <!--  ID CONFIGURATION 
+        Idgeneration determines initial id for the basecollections.
+    -->
+    <idgeneration>
+        <basecollection id="0"/>
+    </idgeneration>
+    
+    <!-- METADATA MAPPING 
+        This section only defines the data structure. How data is mapped to DC and Capture.        
+    -->
+    <metadatamapping>
+        <element name="abstract">
+            <mapping schema="capture" name="abstract"/>
+        </element>
+        <element name="accessRights">
+            <mapping schema="capture" name="accessRights"/>
+        </element>
+        <element name="actionId">
+            <mapping schema="capture" name="actionId"/>
+        </element>
+        <element name="additionalinfo">
+            <mapping schema="capture" name="additionalinfo"/>
+        </element>
+        <element name="address">
+            <mapping schema="capture" name="address"/>
+        </element>
+        <element name="agent">
+            <mapping schema="capture" name="agent"/>
+        </element>
+        <element name="agentId">
+            <mapping schema="capture" name="agentId"/>
+        </element>
+         <element name="agentRole">
+            <mapping schema="capture" name="agentRole"/>
+        </element>
+        <element name="agentType">
+            <mapping schema="capture" name="agentType"/>
+        </element>
+        <element name="analogMedium">
+            <mapping schema="capture" name="analogMedium"/>
+        </element>
+        <element name="aquired">
+            <mapping schema="capture" name="aquired"/>
+        </element>
+        <element name="audioChannel">
+            <mapping schema="capture" name="audioChannel"/>
+        </element>
+        <element name="authority">
+            <mapping schema="capture" name="authority"/>
+        </element>
+        <element name="bibliographicCitation">
+            <mapping schema="capture" name="bibliographicCitation"/>
+        </element>
+        <element name="bitDepth">
+            <mapping schema="capture" name="bitDepth"/>
+        </element>
+        <element name="bitRate">
+            <mapping schema="capture" name="bitRate"/>
+        </element>
+        <element name="bitRateMode">
+            <mapping schema="capture" name="bitRateMode"/>
+        </element>
+        <element name="captured">
+            <mapping schema="capture" name="captured"/>
+        </element>
+        <element name="channels">
+            <mapping schema="capture" name="channels"/>
+        </element>
+        <element name="chromaSubsampling">
+            <mapping schema="capture" name="chromaSubsampling"/>
+        </element>
+        <element name="codec">
+            <mapping schema="capture" name="codec"/>
+        </element>
+        <element name="codecId">
+            <mapping schema="capture" name="codecId"/>
+        </element>
+        <element name="colorPrimaries">
+            <mapping schema="capture" name="colorPrimaries"/>
+        </element>
+        <element name="colorSpace">
+            <mapping schema="capture" name="colorSpace"/>
+        </element>
+        <element name="compression">
+            <mapping schema="capture" name="compression"/>
+        </element>
+        <element name="compressionMode">
+            <mapping schema="capture" name="compressionMode"/>
+        </element>
+        <element name="conformsTo">
+            <mapping schema="capture" name="conformsTo"/>
+        </element>
+        <element name="contributor">
+            <mapping schema="dc" name="contributor"/>
+            <mapping schema="capture" name="contributor"/>
+        </element>
+        <element name="controlledplace">
+            <mapping schema="capture" name="controlledplace"/>
+        </element>
+        <element name="controlledsubject">
+            <mapping schema="capture" name="controlledsubject"/>
+        </element>
+        <element name="corporateId">
+            <mapping schema="capture" name="corporateId"/>
+        </element>
+        <element name="corporateName">
+            <mapping schema="capture" name="corporateName"/>
+        </element>
+        <element name="created">
+            <mapping schema="capture" name="created"/>
+        </element>
+        <element name="creator">
+            <mapping schema="dc" name="creator"/>
+            <mapping schema="capture" name="creator"/>
+        </element>
+        <element name="currentLocation">
+            <mapping schema="capture" name="currentLocation"/>
+        </element>
+        <element name="dataGathered">
+            <mapping schema="capture" name="dataGathered"/>
+        </element>
+        <element name="dateSubmitted">
+            <mapping schema="capture" name="dateSubmitted"/>
+        </element>
+        <element name="encryption">
+            <mapping schema="capture" name="encryption"/>
+        </element>
+        <element name="destructionAuthorization">
+            <mapping schema="capture" name="destructionAuthorization"/>
+        </element>
+        <element name="destructionDate">
+            <mapping schema="capture" name="destructionDate"/>
+        </element>
+        <element name="destructionMethod">
+            <mapping schema="capture" name="destructionMethod"/>
+        </element>
+        <element name="destructionReason">
+            <mapping schema="capture" name="destructionReason"/>
+        </element>
+        <element name="dimensions">
+            <mapping schema="capture" name="dimensions"/>
+        </element>
+        <element name="duration">
+            <mapping schema="capture" name="duration"/>
+        </element>
+        <element name="educationLevel">
+            <mapping schema="capture" name="educationLevel"/>
+        </element>
+        <element name="encodingPassCount">
+            <mapping schema="capture" name="encodingPassCount"/>
+        </element>
+        <element name="eventId">
+            <mapping schema="capture" name="eventId"/>
+        </element>
+        <element name="eventType">
+            <mapping schema="capture" name="eventType"/>
+        </element>
+        <element name="extent">
+            <mapping schema="capture" name="extent"/>
+        </element>
+        <element name="extentUnit">
+            <mapping schema="capture" name="extentUnit"/>
+        </element>
+        <element name="extentValue">
+            <mapping schema="capture" name="extentValue"/>
+        </element>
+        <element name="extentsize">
+            <mapping schema="capture" name="extentsize"/>
+        </element>
+        <element name="fileName">
+            <mapping schema="capture" name="fileName"/>
+        </element>
+        <element name="format">
+            <mapping schema="dc" name="format"/>
+            <mapping schema="capture" name="format"/>
+        </element>
+        <element name="formatProfile">
+            <mapping schema="capture" name="formatProfile"/>
+        </element>
+        <element name="formatSettingsGOP">
+            <mapping schema="capture" name="formatSettingsGOP"/>
+        </element>
+        <element name="formatVersion">
+            <mapping schema="capture" name="formatVersion"/>
+        </element>
+        <element name="frameRate">
+            <mapping schema="capture" name="frameRate"/>
+        </element>
+        <element name="functionCode">
+            <mapping schema="capture" name="functionCode"/>
+        </element>
+        <element name="hardwareEnvironment">
+            <mapping schema="capture" name="hardwareEnvironment"/>
+        </element>
+        <element name="hardwareSupport">
+            <mapping schema="capture" name="hardwareSupport"/>
+        </element>
+        <element name="hasColor">
+            <mapping schema="capture" name="hasColor"/>
+        </element>
+        <element name="hasFormat">
+            <mapping schema="capture" name="hasFormat"/>
+        </element>
+        <element name="hasPart">
+            <mapping schema="capture" name="hasPart"/>
+        </element>
+        <element name="hasRedaction">
+            <mapping schema="capture" name="hasRedaction"/>
+        </element>
+        <element name="hasSound">
+            <mapping schema="capture" name="hasSound"/>
+        </element>
+        <element name="hasVersion">
+            <mapping schema="capture" name="hasVersion"/>
+        </element>
+        <element name="history">
+            <mapping schema="capture" name="history"/>
+        </element>
+        <element name="id">
+            <mapping schema="capture" name="id"/>
+        </element>
+        <element name="isAncestor">
+            <mapping schema="management" name="isAncestor"/>
+        </element>
+        <element name="isChildOf">
+            <mapping schema="capture" name="isChildOf"/>
+        </element>
+        <element name="isFormatOf">
+            <mapping schema="capture" name="isFormatOf"/>
+        </element>
+        <element name="isMemberOf">
+            <mapping schema="capture" name="isMemberOf"/>
+        </element>
+        <element name="isPartOf">
+            <mapping schema="capture" name="isPartOf"/>
+        </element>
+        <element name="isParentOf">
+            <mapping schema="capture" name="isParentOf"/>
+        </element>
+        <element name="isRedactionOf">
+            <mapping schema="capture" name="isRedactionOf"/>
+        </element>
+        <element name="isReferencedBy">
+            <mapping schema="capture" name="isReferencedBy"/>
+        </element>
+        <element name="isReplacedBy">
+            <mapping schema="capture" name="isReplacedBy"/>
+        </element>
+        <element name="isRequiredBy">
+            <mapping schema="capture" name="isRequiredBy"/>
+        </element>
+        <element name="issued">
+            <mapping schema="capture" name="issued"/>
+        </element>
+        <element name="isVersionOf">
+            <mapping schema="capture" name="isVersionOf"/>
+        </element>
+        <element name="jurisdiction">
+            <mapping schema="capture" name="jurisdiction"/>
+        </element>
+        <element name="language">
+            <mapping schema="dc" name="language"/>
+            <mapping schema="capture" name="language"/>
+        </element>
+        <element name="level">
+            <mapping schema="capture" name="level"/>
+        </element>
+        <element name="levelOfDetail">
+            <mapping schema="capture" name="levelOfDetail"/>
+        </element>
+        <element name="license">
+            <mapping schema="capture" name="license"/>
+        </element>
+        <element name="lifeSpanStatus">
+            <mapping schema="capture" name="lifeSpanStatus"/>
+        </element>
+        <element name="locationDetails">
+            <mapping schema="capture" name="locationDetails"/>
+        </element>
+        <element name="mandateDetails">
+            <mapping schema="capture" name="mandateDetails"/>
+        </element>
+        <element name="mandateName">
+            <mapping schema="capture" name="mandateName"/>
+        </element>
+        <element name="mandateRefersTo">
+            <mapping schema="capture" name="mandateRefersTo"/>
+        </element>
+        <element name="maximumBitRate">
+            <mapping schema="capture" name="maximumBitRate"/>
+        </element>
+        <element name="mediator">
+            <mapping schema="capture" name="mediator"/>
+        </element>
+        <element name="medium">
+            <mapping schema="capture" name="medium"/>
+        </element>
+        <element name="modified">
+            <mapping schema="capture" name="modified"/>
+        </element>
+        <element name="name">
+            <mapping schema="capture" name="name"/>
+        </element>
+        <element name="noneditableObject">
+            <mapping schema="capture" name="noneditableObject"/>
+        </element>
+        <element name="objectdescription">
+            <mapping schema="dc" name="description"/>
+            <mapping schema="capture" name="description"/>
+        </element>
+        <element name="objectPath">
+            <mapping schema="management" name="objectPath"/>
+        </element>
+        <element name="operationalPattern">
+            <mapping schema="capture" name="operationalPattern"/>
+        </element>
+        <element name="originalFrameRate">
+            <mapping schema="capture" name="originalFrameRate"/>
+        </element>
+        <element name="originalHeight">
+            <mapping schema="capture" name="originalHeight"/>
+        </element>
+        <element name="personalId">
+            <mapping schema="capture" name="personalId"/>
+        </element>
+        <element name="personalName">
+            <mapping schema="capture" name="personalName"/>
+        </element>
+        <element name="pixelAspectRatio">
+            <mapping schema="capture" name="pixelAspectRatio"/>
+        </element>
+        <element name="placeId">
+            <mapping schema="capture" name="placeId"/>
+        </element>
+        <element name="placeType">
+            <mapping schema="capture" name="placeType"/>
+        </element>
+        <element name="preferredName">
+            <mapping schema="capture" name="preferredName"/>
+        </element>
+        <element name="preservation">
+            <mapping schema="capture" name="preservation"/>
+        </element>
+        <element name="publisher">
+            <mapping schema="dc" name="publisher"/>
+            <mapping schema="capture" name="publisher"/>
+        </element>
+        <element name="recordStatus">
+            <mapping schema="capture" name="recordStatus"/>
+        </element>
+        <element name="references">
+            <mapping schema="capture" name="references"/>
+        </element>
+        <element name="registrationCode">
+            <mapping schema="capture" name="registrationCode"/>
+        </element>
+        <element name="relationSource">
+            <mapping schema="capture" name="relationSource"/>
+        </element>
+        <element name="replaces">
+            <mapping schema="capture" name="replaces"/>
+        </element>
+        <element name="requires">
+            <mapping schema="capture" name="requires"/>
+        </element>
+        <element name="resolution">
+            <mapping schema="capture" name="resolution"/>
+        </element>
+        <element name="retentionPeriod">
+            <mapping schema="capture" name="retentionPeriod"/>
+        </element>
+        <element name="retentionPeriodEnd">
+            <mapping schema="capture" name="retentionPeriodEnd"/>
+        </element>
+        <element name="retentionReason">
+            <mapping schema="capture" name="retentionReason"/>
+        </element>
+        <element name="rightsDetails">
+            <mapping schema="capture" name="rightsDetails"/>
+        </element>
+        <element name="rightsType">
+            <mapping schema="capture" name="rightsType"/>
+        </element>
+        <element name="samplingFrequency">
+            <mapping schema="capture" name="samplingFrequency"/>
+        </element>
+        <element name="samplingRate">
+            <mapping schema="capture" name="samplingRate"/>
+        </element>
+        <element name="scanOrder type">
+            <mapping schema="capture" name="scanOrder"/>
+        </element>
+        <element name="scanType">
+            <mapping schema="capture" name="scanType"/>
+        </element>
+        <element name="secondaryName">
+            <mapping schema="capture" name="secondaryName"/>
+        </element>
+        <element name="significantColor">
+            <mapping schema="capture" name="significantColor"/>
+        </element>
+        <element name="software">
+            <mapping schema="capture" name="software"/>
+        </element>
+        <element name="softwareEnvironment">
+            <mapping schema="capture" name="softEnvironment"/>
+        </element>
+        <element name="softwareSupport">
+            <mapping schema="capture" name="softwareSupport"/>
+        </element>
+        <element name="source">
+            <mapping schema="dc" name="source"/>
+            <mapping schema="capture" name="source"/>
+        </element>
+        <element name="spatial">
+            <mapping schema="capture" name="spatial"/>
+        </element>
+        <element name="standard">
+            <mapping schema="capture" name="standard"/>
+        </element>
+        <element name="streamSize">
+            <mapping schema="capture" name="streamSize"/>
+        </element>
+        <element name="subject">
+            <mapping schema="dc" name="subject"/>
+            <mapping schema="capture" name="subject"/>
+        </element>
+        <element name="tableOfContents">
+            <mapping schema="capture" name="tableOfContents"/>
+        </element>
+        <element name="technicalAccessInhibitors">
+            <mapping schema="capture" name="technicalAccessInhibitors"/>
+        </element>
+        <element name="technicalCharacterSet">
+            <mapping schema="capture" name="technicalCharacterSet"/>
+        </element>
+        <element name="technicalDtd">
+            <mapping schema="capture" name="technicalDtd"/>
+        </element>
+        <element name="technicalInfo">
+            <mapping schema="capture" name="technicalInfo"/>
+        </element>
+        <element name="temporalBegin">
+            <mapping schema="capture" name="temporalBegin"/>
+        </element>
+        <element name="temporalEnd">
+            <mapping schema="capture" name="temporalEnd"/>
+        </element>
+        <element name="timecodeStart">
+            <mapping schema="capture" name="timecodeStart"/>
+        </element>
+        <element name="title">
+            <mapping schema="dc" name="title"/>
+            <mapping schema="capture" name="title"/>
+        </element>
+        <element name="transferDate">
+            <mapping schema="capture" name="transferDate"/>
+        </element>
+        <element name="type">
+            <mapping schema="dc" name="type"/>
+            <mapping schema="capture" name="type"/>
+        </element>
+        <element name="uri">
+            <mapping schema="capture" name="uri"/>
+        </element>
+        <element name="valid">
+            <mapping schema="capture" name="valid"/>
+        </element>
+        <element name="version">
+            <mapping schema="capture" name="version"/>
+        </element>
+        <element name="writingApplication">
+            <mapping schema="capture" name="writingApplication"/>
+        </element>
+        <element name="writingLibrary">
+            <mapping schema="capture" name="writingLibrary"/>
+        </element>
+    </metadatamapping>
+    
+    <!-- FORM 
+        What kind of forms are available. Contains mapping of fields and underlying metadata elements.
+        All information required to create forms, validation, user logic etc. are defined here.
+    -->
+    <forms>
+        <form name="action" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="classification" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="preferredName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="secondaryName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="hidden"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="hidden">
+                        <authoritative_list>
+                            <item>public</item>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="noneditableObject" readonly="true" generated="false" required="false" type="checkbox"/>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="agent" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="agentType" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>person</item>
+                            <item>family</item>
+                            <item>company</item>
+                            <item>society</item>
+                            <item>foundation</item>
+                            <item>project</item>
+                            <item>organization</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="preferredName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="secondaryName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="hidden"/>
+                    <field element="occupation" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="history" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>public</item>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                        </authoritative_list>
+                    </field>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="audio" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="fileName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dateTimeOriginal" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="software" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="singlerow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="objectFormat">
+                    <field element="extentsize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="medium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encryption" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compression" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="formatVersion" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="formatProfile" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="technical">
+                    <field element="duration" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitRateMode" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>cbr</item>
+                            <item>vbr</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="bitRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="channels" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="samplingRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitDepth" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="streamSize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="writingApplication" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="writingLibrary" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="samplingFrequency" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="audioChannel" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalCharacterSet" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalDtd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogMedium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogExtent" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalAccessInhibitors" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalInfo" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="basecollection" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="levelOfDetail" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>notArranged</item>
+                            <item>partiallyArranged</item>
+                            <item>arranged</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="additionalinfo" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="singlerow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="currentLocation" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="true" type="date"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="groups">
+                    <field element="groups" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="document" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="abstract" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="tableOfContents" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="history" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="singlerow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="objectFormat">
+                    <field element="extentsize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="medium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encryption" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compression" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalCharacterSet" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalDtd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogMedium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalAccessInhibitors" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalInfo" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="currentLocation" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="locationDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="preservation" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="status">
+                    <field element="recordStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lifeSpanStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="version" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="drawing" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="history" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dimensions" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="basematerial" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>paper</item>
+                            <item>paperboard</item>
+                            <item>plastics</item>
+                            <item>textile</item>
+                            <item>other</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="status">
+                    <field element="recordStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lifeSpanStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="version" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="event" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="eventType" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>party</item>
+                            <item>conflict</item>
+                            <item>fusion</item>
+                            <item>bankruptcy</item>
+                            <item>sportevent</item>
+                            <item>culturalevent</item>
+                            <item>exhibition</item>
+                            <item>trip</item>
+                            <item>meeting</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="preferredName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="secondaryName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="hidden"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>public</item>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                        </authoritative_list>
+                    </field>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="groupcollection" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="additionalinfo" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="singlerow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="currentLocation" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="true" type="date"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="content">
+                    <field element="content" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="image" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="fileName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dimensions" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dateTimeOriginal" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="software" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                </tab>
+                <tab name="EXIF-camera">
+                    <field element="make" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="model" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="cameraSoftware" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="EXIF-exposure">
+                    <field element="shutterSpeedValue" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="apertureValue" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="photographicSensitivity" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="ISOSpeedRatings" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="exposureBias" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="fired" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="mode" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="redEyeMode" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="exposureProgram" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="exposureMode" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="meteringMode" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lensMake" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lensModel" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="focalLength" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="whiteBalance" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lightSource" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="EXIF-GPS">
+                    <field element="GPSLatitude" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="GPSLongitude" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="GPSAltitude" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="objectFormat">
+                    <field element="extentsize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="medium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encryption" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compression" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="imagetype" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>negative</item>
+                            <item>glassnegative</item>
+                            <item>slide</item>
+                            <item>glassslide</item>
+                            <item>paperprint</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="imagequality" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="significantColor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitDepthColor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalCharacterSet" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalDtd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogMedium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalAccessInhibitors" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalInfo" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hasColor" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>yes</item>
+                            <item>no</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="colorSpace" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="map" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dimensions" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="scale" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="basematerial" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>paper</item>
+                            <item>paperboard</item>
+                            <item>plastics</item>
+                            <item>textile</item>
+                            <item>other</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="status">
+                    <field element="recordStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="lifeSpanStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="version" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                    <field element="thumb" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="movingimage" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="fileName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dateTimeOriginal" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="software" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="singlerow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="objectFormat">
+                    <field element="extentsize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="medium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encryption" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compression" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compressionMode" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>lossy</item>
+                            <item>lossless</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="hardwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="technical">
+                    <field element="operationalPattern" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="codec" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="codecId" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="formatSettingsGOP" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>intra</item>
+                            <item>inter</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="scanType" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>progressive</item>
+                            <item>interlaced</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="scanOrder" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>topfieldfirst</item>
+                            <item>lowerfieldfirst</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="duration" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="standard" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>pal</item>
+                            <item>secam</item>
+                            <item>ntsc</item>
+                            <item>hd</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="resolution" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="originalHeight" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="colorSpace" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="colorPrimaries" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="chromaSubsampling" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="level" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="displayAspectRatio" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>ratioA</item>
+                            <item>ratioB</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="pixelAspectRatio" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encodingPassCount" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="timecodeStart" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="streamSize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="writingApplication" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="writingLibrary" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="significantColor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitDepth" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitDepthColor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="samplingFrequency" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="maximumBitRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="bitRateMode" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>cbr</item>
+                            <item>vbr</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="originalFrameRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="frameRate" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalCharacterSet" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalDtd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogMedium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogExtent" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalAccessInhibitors" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalInfo" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hasSound" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>yes</item>
+                            <item>no</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="hasColor" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>yes</item>
+                            <item>no</item>
+                        </authoritative_list>
+                    </field>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="original">
+                    <field element="original" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="physicalobject" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="publisher" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="source" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="history" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="dimensions" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="license" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="false" type="date"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="disposition">
+                    <field element="retentionPeriodEnd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="retentionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="destructionMethod" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionReason" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="destructionAuthorization" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="transferDate" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="retentionPeriod" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="status">
+                    <field element="lifeSpanStatus" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="version" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="place" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="placeType" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>building</item>
+                            <item>district</item>
+                            <item>municipality</item>
+                            <item>region</item>
+                            <item>province</item>
+                            <item>state</item>
+                            <item>continent</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="preferredName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="secondaryName" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="address" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="hidden"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                </tab>
+                <tab name="attachments">
+                    <field element="attachment" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+        <form name="unitcollection" description="Default form for manual add and modify actions.">
+            <tabs>
+                <tab name="basic">
+                    <field element="pid" readonly="true" generated="true" required="false" type="hidden"/>
+                    <field element="id" readonly="false" generated="true" required="false" type="textfield"/>
+                    <field element="type" readonly="false" generated="false" required="false" type="select"/>
+                    <field element="title" readonly="false" generated="false" required="true" type="textfield"/>
+                    <field element="subject" readonly="false" generated="false" required="false" type="textfield" multivalue="delimited"/>
+                    <field element="controlledsubject" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="yso">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                    <field element="creator" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="contributor" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="objectdescription" readonly="false" generated="false" required="false" type="textarea"/>
+                    <field element="spatial" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="temporal" readonly="false" generated="false" required="false" type="timerange">
+                        <field element="temporalBegin" readonly="false" generated="false" required="false" type="date"/>
+                        <field element="temporalEnd" readonly="false" generated="false" required="false" type="date"/>
+                    </field>
+                    <field element="isPartOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="agent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="multifield">
+                        <field element="agentId" readonly="false" generated="false" required="false" type="relation"/>
+                        <field element="agentRole" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>author</item>
+                                <item>contributor</item>
+                                <item>recorder</item>
+                                <item>receiver</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="actionId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="eventId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="placeId" readonly="false" generated="false" required="false" type="relation" multivalue="multifield"/>
+                    <field element="controlledplace" readonly="false" generated="false" required="false" type="linked" multivalue="multifield" source="sapo">
+                        <field element="name" readonly="false" generated="false" required="true" type="textfield"/>
+                        <field element="uri" readonly="false" generated="false" required="true" type="textfield"/>
+                    </field>
+                </tab>
+                <tab name="additional">
+                    <field element="additionalinfo" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="tableOfContents" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="language" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="accessRights" readonly="false" generated="false" required="false" type="select">
+                        <authoritative_list>
+                            <item>confidential</item>
+                            <item>restricted</item>
+                            <item>public</item>
+                        </authoritative_list>
+                    </field>
+                    <field element="rightsType" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="rightsDetails" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="extent" readonly="false" generated="false" required="false" type="nested" nestingStyle="multirow" multivalue="false">
+                        <field element="extentValue" readonly="false" generated="false" required="false" type="textfield"/>
+                        <field element="extentUnit" readonly="false" generated="false" required="false" type="select">
+                            <authoritative_list>
+                                <item>unit</item>
+                                <item>shelfspace</item>
+                                <item>mb</item>
+                            </authoritative_list>
+                        </field>
+                    </field>
+                    <field element="currentLocation" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="dates">
+                    <field element="created" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dateSubmitted" readonly="false" generated="false" required="false" type="date"/>
+                    <field element="issued" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="modified" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="valid" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="aquired" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="captured" readonly="false" generated="false" required="true" type="date"/>
+                    <field element="dataGathered" readonly="false" generated="false" required="true" type="date"/>
+                </tab>
+                <tab name="objectFormat">
+                    <field element="extentsize" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="medium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="encryption" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="compression" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="hardwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareEnvironment" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="softwareSupport" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="format" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalCharacterSet" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalDtd" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="analogMedium" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalAccessInhibitors" readonly="false" generated="false" required="false" type="textfield"/>
+                    <field element="technicalInfo" readonly="false" generated="false" required="false" type="textfield"/>
+                </tab>
+                <tab name="relations">
+                    <field element="conformsTo" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasFormat" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasPart" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasVersion" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isFormatOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReferencedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isReplacedBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRequiredBy" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isVersionOf" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="references" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="replaces" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="requires" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="relationSource" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="hasRedaction" readonly="false" generated="false" required="false" type="relation"/>
+                    <field element="isRedactionOf" readonly="false" generated="false" required="false" type="relation"/>
+                </tab>
+                <tab name="content">
+                    <field element="content" readonly="false" generated="false" required="false" type="link"/>
+                </tab>
+            </tabs>
+        </form>
+    </forms>
+    
+    <!-- SEARCH AND INDEXING 
+        
+        SETTINGS
+        Search history etc.
+        
+        FORMS
+        Fields in the search form. elements as msg property keys (eg. title -> resource.title and resource.title.info)
+        Every field must be implemented in the search action!
+        
+        Solr search engine configuration
+            Tags: 1
+            logQueries      = Log used search terms and result count, highest and lowest relevancy.
+            rowsToDisplay   = Default amount of results to display on a page.
+            
+            Tags: 1
+            searchFields    = Contains a list of fields which are searched for entered terms.
+
+            Tags: 1-n
+            field:
+                name        = Name of the search field in Solr core's schema.
+                boost       = Relevancy boost for matches in the field.
+                ngram       = Search also ngram version of the field data. 
+                ngramBoost  = Relevancy boost for ngram token matches.
+        
+        RESULTS
+	        Paging:
+	            rows:   Max amount of rows to display on each page, max size 500
+	            images: Amount of images [not yet implemented]
+	    
+	        Result layout:
+	            type: [columns|grid]
+	                columns: Datatables implementation
+	                defaultSort: Default sort to be used by Datatables on first load. 
+                                 Number is column index starting from 0. MUST match a column with sortable="true" attribute. [[column index, 'asc|desc']].
+                                 One can also set multicolumn sorting by using syntax "[column index, 'asc|desc'], [column index, 'asc|desc']...", without the outer quotes.
+	                column attributes:
+	                    name:       Solr field to sort by
+	                    headerKey:  Message bundle key to use as datatable header for said cell
+	                    sortable:   Sets said column to be sortable or not. [true|false]
+	                    width:      Width of the column. [px|em|%|auto]
+	                grid:    Masonry implementation
+	    
+	        Facets:
+	        facetField: name of the solr field that is displayed in the facet list.        
+    --> 
+    <search history="5">
+        <form name="search">
+            <field name="freetext" type="textarea" editable="true" generated="false" required="false"> <!-- Node  -->
+                <solr> <!-- Subnode -->
+                    <solrField name="c.title" boost="20" ngramBoost="2" />
+                    <solrField name="c.preferredName" boost="20" ngramBoost="2" />
+                    <solrField name="c.alternativeTitle" boost="12" ngramBoost="2" />
+                    <solrField name="c.subtitle" boost="6" ngramBoost="2" />
+                    <solrField name="c.spatial" boost="10" />
+                    <solrField name="c.content" boost="8" />
+                    <solrField name="c.subject" boost="8" />
+                    <solrField name="c.additionalInformation" boost="4" />
+                    <solrField name="c.description" boost="4" />
+                </solr>
+                <subFields> <!-- Subnode -->
+                	<field name="searchInsideFiles" type="checkbox" editable="true" generated="false" required="false"/> <!-- SubsubNode -->
+           			<field name="searchNgrams" type="checkbox" editable="true" generated="false" required="false"> <!-- SubsubNode -->
+	                    <solr>
+	                        <solrField name="title_ngram" />
+	                        <solrField name="subtitle_ngram" />
+	                        <solrField name="alternativeTitle_ngram" />
+	                    </solr>
+            		</field>
+                </subFields>
+            </field>
+            <field name="startDate" type="text" editable="true" generated="false" required="false">
+                
+            </field>
+            <field name="endDate" type="text" editable="true" generated="false" required="false">
+                
+            </field>
+            <field name="c.title" type="text" editable="true" generated="false" required="false">
+                <solr>
+                    <solrField name="c.title" boost="20" ngramBoost="2" />
+                    <solrField name="c.preferredName" boost="20" ngramBoost="2" />
+                    <solrField name="alternativeTitle" boost="12" ngramBoost="2" />
+                    <solrField name="subtitle" boost="6" ngramBoost="2" />
+                </solr>
+            </field>
+            <field name="c.spatial" type="text" editable="true" generated="false" required="false">
+                <solr>
+                    <solrField name="c.spatial" boost="10" />             
+                </solr>
+            </field>
+            <field name="c.subject" type="text" editable="true" generated="false" required="false">
+                <solr>
+                    <solrField name="c.subject" boost="8" />
+                    <solrField name="c.name" boost="8" />
+                </solr>         
+            </field>
+            <field name="c.creator" type="text" editable="true" generated="false" required="false">
+                <solr>
+                    <solrField name="c.creator" boost="8" />          
+                </solr>         
+            </field>
+            <field name="c.type" type="checkbox" editable="true" generated="false" required="false" /> 
+        </form>
+        
+        <results>
+            <paging enabled="true" type="scroll">
+                <rows>250</rows>
+                <images>100</images>
+            </paging>
+            <resultLayout type="columns" defaultSort="[3, 'desc']">
+                <column name="c.type" headerKey="headerkey.null" sortable="true" width="16px"/>
+                <column name="c.id" headerKey="headerkey.id" sortable="true" width="50px"/>
+                <column name="c.title" headerKey="headerkey.title" sortable="true" width="auto"/>
+                <column name="score" headerKey="search.score" sortable="true" width="100px"/>
+                <column name="download" headerKey="headerkey.null" sortable="false" width="20px"/>
+                <column name="basket" headerKey="headerkey.null" sortable="false" width="20px"/>
+            </resultLayout>
+            <resultLayout type="grid">
+                <!-- Define another layout -->
+            </resultLayout>
+           <facets>
+                <facetField name="c.type"/>
+                <facetField name="c.creator"/>
+            </facets>
+        </results>
+    </search>
+    
+    <hierarchy>
+        <!-- 
+            ARCHIVE ARCHITECTURE
+            Defines the names of each level of collections, as well as the maximum depth.
+           
+             order           = Defines the order in which the levels can be created. Order 0 is the root object, 1 is first visible level.
+             name            = Name which refers to the message bundle
+             contentModel    = OSA Fedora content model
+             allowDocuments  = Are documents allowed in this level. [true|false]   
+
+            DEFINING ARCHIVE LEVELS
+            Each level contains information about what metadata is inherited to its children. 
+            There can be common rules as well as content model specific inheritance rules.
+
+             default        = is the value inherited by default to child objects. [true|false]
+             manual         = can the value be inherited manually.  [true|false]
+             behaviour      = how inheritance behaves. 
+                                incremental         will add inherited value to existing values
+                                replaceExisting     will overwrite only existing values with inherited value.
+                                replaceEmpty        will overwrite only empty fields with inherited value. 
+                                replaceAll          will overwrite any field with inherited value.
+             name           = name of the metadata element from the Capture model
+             contentModel   = name of the content model to which the rule applies.
+            
+	         <level order="n" name="loremipsum" contentModel="osa-system:contentmodel-generic" allowDocuments="false">
+	            <inheritance>
+	                <element name="publisher" default="true" manual="true" behaviour="replaceAll" />
+	            </inheritance>                                    
+	            <inheritance contentModel="osa-system:contentModel-document">
+	                <element name="storageLocation" default="false" manual="true" behaviour="replaceEmpty" />
+	            </inheritance>
+	            <inheritance contentModel="osa-system:contentModel-image">
+	                <element name="contributor" default="false" manual="true" behaviour="replaceEmpty" />
+	            </inheritance>                            
+	        </level>
+        --> 
+         
+        <level order="0">
+            <!-- Level 0 is known as root. It is a special level which is used to link all data to single context. -->
+            <contentModels>
+                <contentModel name="root" contentModel="osa-system:contentmodel-root" allowDocuments="false" allowCollections="true"/>
+            </contentModels>
+            <inheritance>
+                <element name="owner" default="true" manual="true" behaviour="replaceEmpty" />
+            </inheritance>
+        </level>
+        <level order="1">
+            <contentModels>
+                <contentModel name="base" contentModel="osa-system:contentmodel-basecollection" allowDocuments="false"/>
+            </contentModels>
+            <inheritance>
+                <element name="retentionPeriod" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionPeriodEnd" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionReason" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="placeId" default="true" manual="false" behaviour="incremental" />
+            </inheritance>
+        </level>
+        <level order="2">
+            <contentModels>
+                <contentModel name="group" contentModel="osa-system:contentmodel-groupcollection" allowDocuments="true"/>
+            </contentModels>
+            <inheritance>
+                <element name="retentionPeriod" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionPeriodEnd" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionReason" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="placeId" default="true" manual="false" behaviour="incremental" />
+            </inheritance>        
+        </level>
+        <level order="3">
+            <contentModels>
+	            <contentModel name="group" contentModel="osa-system:contentmodel-groupcollection" allowDocuments="true"/>
+	            <contentModel name="unit" contentModel="osa-system:contentmodel-unitcollection" allowDocuments="true"/>
+            </contentModels>
+            <inheritance>
+                <element name="retentionPeriod" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionPeriodEnd" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionReason" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="placeId" default="true" manual="false" behaviour="incremental" />
+            </inheritance>        
+        </level>
+        <level order="4" maxOrder="5">
+            <contentModels>
+                <contentModel name="group" contentModel="osa-system:contentmodel-groupcollection" allowDocuments="true"/>
+                <contentModel name="unit" contentModel="osa-system:contentmodel-unitcollection" allowDocuments="true"/>
+            </contentModels>
+            <inheritance>
+                <element name="retentionPeriod" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionPeriodEnd" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="retentionReason" default="true" manual="true" behaviour="replaceEmpty" />
+                <element name="placeId" default="true" manual="false" behaviour="incremental" />
+            </inheritance>        
+        </level>
+    </hierarchy>
+    <destruction>
+	    <!-- 
+	       DEFINING THE DESTRUCTION PLAN
+	       method:                 Method to use for disposal. [delete|dispose]
+	           delete:             Deletes the object and all related information. Creates still logs and/or reports.
+	           dispose:            Sets the object(s) inactive, deletes most of the related information but retains a residual object.
+	       approval:               How objects remove is approved
+	           auto:               Automatically 
+	           list                Based on disposal list and manual approval of appropriate privileges.
+	       scheduled:              Is object disposal scheduled. Disposal is based on retention period. [true|false]
+	       recursiveDestruction:   Are child objects disposed recursively. If false, will create orphaned objects.
+	       allowOrphans:           Can parent object be disposed, leaving orphaned objects.  
+	                               If false, cannot dispose non-empty collections. SET false, until this functionality implemented.
+	       createResidualObjects:  Create a passive residual object with limited metadata and audit trail.
+	     -->
+        <method>dispose</method>
+        <approval>list</approval> 
+        <scheduled>true</scheduled>
+        <recursiveDestruction>true</recursiveDestruction>
+        <allowOrphans>false</allowOrphans>
+        <createResidualObjects>true</createResidualObjects>
+        <residualObjectDefinition>
+            <metadata>
+                <!-- what additional metadata is preserved -->
+                <element name="PID" />
+                <element name="destructionDate" />
+                <element name="destructionReason" />
+                <element name="destructionAuthorization" />
+                <element name="destructionMethod" />
+            </metadata>
+            <dataStreams>
+                <!-- which streams are preserved as is -->
+                <stream id="DC" />
+                <stream id="CAPTURE" />
+                <stream id="AUDIT" />
+                <stream id="RELS-EXT" />
+            </dataStreams>
+        </residualObjectDefinition>
+    </destruction>
+   
+     <advancedbrowse>
+      <!--
+    	ADVANCED BROWSE SETTINGS
+    	 		
+    	 		ENABLED FACETS		= The facets thet are included in AdvancedBrowse
+     -->
+     	<enabledFacets>
+     		 <facetField name="c.subject"/> 
+     		 <facetField name="c.accessRights"/> 
+     		 <facetField name="c.creator"/> 
+     		 <facetField name="c.agentRole"/> 
+     		 <facetField name="c.type"/> 
+     		  <facetField name="c.title"/> 
+     		 <facetField name="c.preferredName"/> 
+     		 <facetField name="c.placeType"/>
+     	</enabledFacets>     			
+     </advancedbrowse>
+</config>

@@ -1,0 +1,16 @@
+log4j.appender.OSA=org.apache.log4j.ConsoleAppender
+log4j.appender.OSA.layout=org.apache.log4j.PatternLayout
+log4j.appender.OSA.layout.ConversionPattern=%d %p %c - %m%n
+
+log4j.logger.osa.test = DEBUG, OSA
+log4j.logger.fi.util = DEBUG, OSA
+log4j.logger.fi.mamk = DEBUG, OSA
+log4j.logger.net.sourceforge.stripes = INFO, OSA
+log4j.logger.net.sourceforge.stripes.vfs.VFS=INFO, OSA
+log4j.logger.org.apache.commons=INFO, OSA
+log4j.logger.org.apache.commons.digester.Digester.sax=INFO, OSA
+
+#log4j.rootLogger=INFO, OSA
+
+# Leave version logging to INFO level at all times:
+log4j.logger.version=INFO

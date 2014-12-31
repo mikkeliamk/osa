@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="XXXX:F-tol2008actionK" 
+    xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:oai_dc="http://www.mamk.fi"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:osa="http://www.mamk.fi"
+    xmlns:dc="http://www.mamk.fi"
+    xmlns:c="http://www.mamk.fi"
+    xmlns:m="http://www.mamk.fi"
+    xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+	<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+	<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="TOL 2008 action K"/>
+	<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="fedoraAdmin"/>
+</foxml:objectProperties>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+	<foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" MIMETYPE="text/xml">
+	<foxml:xmlContent>
+	<oai_dc:dc>
+		<dc:type xmlns:dc="http://www.mamk.fi">action</dc:type>
+		<dc:identifier xmlns:dc="http://www.mamk.fi">XXXX:F-tol2008actionK</dc:identifier>
+	</oai_dc:dc>
+	</foxml:xmlContent>
+	</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="CAPTURE" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+	<foxml:datastreamVersion ID="CAPTURE.0" LABEL="Capture Record for this object" MIMETYPE="text/xml">
+	<foxml:xmlContent>
+	<osa:capture>
+        <c:id xmlns:c="http://www.mamk.fi">K</c:id>
+        <c:type xmlns:c="http://www.mamk.fi">action</c:type>
+        <c:isPartOf xmlns:c="http://www.mamk.fi">XXXX:C-tol2008actions</c:isPartOf>
+        <c:description xmlns:c="http://www.mamk.fi">Toimialaluokitus 2008</c:description>
+        <c:accessRights xmlns:c="http://www.mamk.fi">public</c:accessRights>
+        <c:preferredName xmlns:c="http://www.mamk.fi">Rahoitus- ja vakuutustoiminta</c:preferredName>
+        <c:noneditableObject xmlns:c="http://www.mamk.fi">true</c:noneditableObject>
+    </osa:capture>
+	</foxml:xmlContent>
+	</foxml:datastreamVersion>
+	</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+	<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="Relationships" MIMETYPE="application/rdf+xml">
+	<foxml:xmlContent>
+	<rdf:RDF>
+	<rdf:Description rdf:about="info:fedora/XXXX:F-tol2008actionK">
+		<hasModel rdf:resource="info:fedora/osa-system:contentmodel-action"/>
+		<isPartOf rdf:resource="info:fedora/XXXX:C-tol2008actions"/>
+	</rdf:Description>
+	</rdf:RDF>
+	</foxml:xmlContent>
+	</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="MANAGEMENT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+	<foxml:datastreamVersion ID="MANAGEMENT.0" LABEL="Management Record for this object" MIMETYPE="text/xml">
+	<foxml:xmlContent>
+	<osa:management>
+	<m:isAncestor xmlns:m="http://www.mamk.fi">XXXX:C-contexts</m:isAncestor>
+	<m:objectPath xmlns:m="http://www.mamk.fi">XXXX:root/XXXX:C-contexts/XXXX:C-actions/XXXX:C-tol2008actions/XXXX:F-tol2008actionK/</m:objectPath>
+	</osa:management>
+	</foxml:xmlContent>
+	</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

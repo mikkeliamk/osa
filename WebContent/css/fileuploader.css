@@ -1,0 +1,185 @@
+/*[fmt]1A90-1A0A-B*/
+/*Have ideas for improving this CSS for the general community? Submit your changes at: https://github.com/Valums-File-Uploader/file-uploader*/
+
+/*
+ * COLORS
+ * ------------
+ * Dark blue:	#3d4a6c #508AB5
+ * Light blue:	#5BA1D4 #A9C0D6
+ * Menu bar:	rgba(51,51,51,0.85) (#333333 with 0.85 opacity)
+ *				rgba(20,20,20,0.85) (#141414 with 0.85 opacity)
+ * Footer:		#333333
+ */
+
+.qq-uploader {
+	position: relative;
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+.qq-upload-button, #qq-delete-orig-button {
+	display: inline-block;
+	min-width: 125px;
+	padding: 7px;
+	text-align: center;
+	box-shadow: 0px 1px 2px #B2B2B2;
+	background: #5BA1D4;
+	font-size: 13px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FFF;
+}
+#qq-delete-orig-button {
+	position: relative;
+	top: -8px;
+	left: 10px;
+}
+.qq-delete-attachment-button{
+	margin-bottom: 5px;
+}
+.qq-upload-button-hover, #qq-delete-orig-button:hover {
+	background: #508AB5;
+}
+.qq-upload-button-focus {
+	/*[disabled]outline:1px dotted #000000;*/
+}
+.qq-upload-button-disabled {
+	background: #ccc;
+	box-shadow: none !important;
+}
+.qq-upload-button-disabled:active {
+	box-shadow: none !important;
+}
+.qq-upload-drop-area, .qq-upload-extra-drop-area {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 50px;
+	z-index: 2;
+	background: #E5E4A9;
+	text-align: center;
+}
+.qq-upload-drop-area span {
+	display: block;
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	margin-top: -8px;
+	font-size: 16px;
+	line-height: 16px;
+}
+.qq-upload-extra-drop-area {
+	position: relative;
+	margin-top: 50px;
+	font-size: 16px;
+	padding-top: 30px;
+	height: 20px;
+	min-height: 40px;
+}
+.qq-upload-drop-area-active {
+/*When files are dragged over the drop-area*/
+	background: #E7E453;
+}
+.qq-upload-list {
+	margin: 8px 0 0;
+	padding: 0;
+	list-style: none;
+}
+.qq-upload-list li {
+	color: #FFFFFF;
+	margin: 0 0 1px;
+	padding: 9px;
+	overflow: hidden;
+	line-height: 15px;
+	font-size: 15px;
+	list-style: none;
+	/*+text-shadow:none;*/
+	-moz-text-shadow: none;
+	-webkit-text-shadow: none;
+	-o-text-shadow: none;
+	text-shadow: none;
+	position: relative;
+	background: #3D4A6C;
+	/* background: #5DA30C -moz-linear-gradient(-45deg, rgba(45, 170, 60, 0), rgba(45, 170, 60, 0) 10%, rgba(146, 209, 0, 0.4) 30%, rgba(146, 209, 0, 0.4) 50%, rgba(45, 170, 60, 0) 50%, rgba(45, 170, 60, 0)); */
+	/* rgba(45, 170, 60, 0) ->  rgba(61, 74, 108, 0)
+	   rgba(146, 209, 0, 0.4) -> rgba(169, 192, 214, 0.4)*/
+	background: #707991 -moz-linear-gradient(-45deg, rgba(61, 74, 108, 0), rgba(61, 74, 108, 0) 10%, rgba(169, 192, 214, 0.4) 30%, rgba(169, 192, 214, 0.4) 50%, rgba(61, 74, 108, 0) 50%, rgba(61, 74, 108, 0));
+	background: #707991 -webkit-gradient(linear, 0 0, 60 60, from(rgba(61, 74, 108, 0)), color-stop(.49, rgba(61, 74, 108, 0)), color-stop(.491, rgba(169, 192, 214, .4)), color-stop(.8, rgba(169, 192, 214, .4)), color-stop(.801, rgba(61, 74, 108, 0)), to(rgba(61, 74, 108, 0)));
+	background-size: 120px 120px;
+	-webkit-animation-name: gradientShift;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-fill-mode: both;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: gradientShift;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-fill-mode: both;
+	-moz-animation-timing-function: linear;
+}
+.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text {
+	margin-right: 12px;
+/*Place text above loading bar*/
+	z-index: 10;
+	position: relative;
+}
+.qq-upload-spinner {
+	display: inline-block;
+	background: url("../img/ajax-loader.gif");
+	width: 15px;
+	height: 15px;
+	vertical-align: text-bottom;
+}
+.qq-upload-size, .qq-upload-cancel {
+	font-size: 12px;
+	font-weight: normal;
+}
+.qq-upload-failed-text {
+	display: none;
+	color: #D8000C;
+}
+.qq-upload-fail .qq-upload-failed-text {
+	display: inline;
+	color: #D8000C;
+}
+.qq-upload-list li.qq-upload-success {
+	background: #5DA30C;
+	color: #FFFFFF;
+}
+.qq-upload-list li.qq-upload-fail {
+/* 	background: #AF0000; */
+/* 	color: #FFFFFF; */
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+.qq-upload-button:active {
+/* 	 box-shadow: 0 0 15px rgba(0,0,0,0.4) inset; */
+}
+.qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text {
+	float: right;
+}
+.qq-upload-spinner {
+	display: none;
+}
+.qq-progress-bar {
+	width: 1%; /* Default 51% */
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	background-color: #5DA30C;
+	box-shadow: 0px 0px 14px #0D4500;
+		
+	-moz-box-shadow: 0px 0px 14px #0D4500;
+	-webkit-box-shadow: 0px 0px 14px #0D4500;
+	-o-box-shadow: 0px 0px 14px #0D4500;
+}
+.qq-upload-cancel {
+	color: #800000;
+}
+.qq-upload-success .qq-progress-bar,
+.qq-upload-fail .qq-progress-bar {
+	display: none;
+}
+

@@ -1,0 +1,1956 @@
+@charset "utf-8";
+/* ----------------------------------------
+ * 					CONTENT
+ *	Search capitalized header for shortcut
+ * ----------------------------------------
+ * 01. GENERAL-USE TEXT, IMAGE & FORMATTING STYLES
+ *		  Styles for general-use text, image and formatting
+ *
+ * 02. LAYOUT
+ * 		  Main layout elements, content container, footer, breadcrumb etc
+ *
+ * 03. POPUP WINDOW FOR TREE VIEW BROWSING
+ *		  Styles for pop-up window containing the tree view
+ *		  For now used only in ingest.jsp
+ *
+ * 04. FULL SCREEN MODAL WINDOW
+ *		  Modal window for ajax loader, not in use
+ *		  Could be refactored to something more elegant
+ * 
+ * 05. FEEDBACK-RELATED ELEMENTS
+ *		  Elements that are related to giving and reading feedback
+ *		  Includes the feedback form and feedback.jsp elements
+ *
+ * 06. NOSCRIPT, LOG IN ERRORS & MESSAGES
+ *		  Div that contain the message informing user that he/she has javascript disabled
+ *		  Div that is used to generate modal window displaying errors when logging in
+ *        Div that holds messages displayed to user
+ *
+ * 07. FRONT PAGE CHANGE LOG
+ *		  Change log related elements
+ *
+ * 08. FACETS & SEARCH RESULTS
+ *		  Styles for faceting elements
+ *		  Includes result page faceting and search page faceted view
+ *
+ * 09. INGEST PAGE ELEMENT STYLING
+ *		  All styling for elements in ingest.jsp
+ *		  Excluding tab layout
+ *
+ * 10. TABS LAYOUT
+ *		  Tab layout styles for ingest.jsp
+ *
+ * 11. BROWSE PAGE
+ *		  Browse.jsp styling
+ *		  Includes tree view and masonry styling
+ *
+ * 12. DIALOG ELEMENTS
+ *		  Elements used in dialog windows
+ *		  Includes divs for error icon and message
+ *
+ * 13. WORKSPACE ELEMENTS
+ *		  Styles and elements used in workspace.jsp
+ *
+ * 14. DATATABLES STYLES
+ *		  Styles used with Datatables plugin on various pages 
+ *
+ * 15. ADMIN.JSP STYLES
+ *        Styles used in admin.jsp
+ * ---------------------------------------------------------------------
+*/
+
+/**
+ * COLORS
+ * ------------
+ * Dark blue:	#3d4a6c #508AB5
+ * Light blue:	#5BA1D4 #A9C0D6
+ * Menu bar:	rgba(51,51,51,0.85) (#333333 with 0.85 opacity)
+ *				rgba(20,20,20,0.85) (#141414 with 0.85 opacity)
+ * Footer:		#333333
+ */
+ 
+ 
+/* 01. GENERAL-USE TEXT, IMAGE & FORMATTING STYLES */
+
+html, body {
+    /* background-color: #F3F3F3; */
+    padding: 0px;
+    margin: 0px;
+    height:100%;
+    color: #333333;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/Roboto-Light.woff') format('woff'),
+       url('fonts/Roboto-Light.ttf') format('truetype');
+}
+
+h1, h2, h3, h4, h5 {
+	color: #333333;
+    font-family: 'Roboto';
+}
+
+.largeheader {
+	margin: 0;
+	margin-bottom: 10px;
+}
+.largeheader-nomargin {margin: 0;}
+
+label {display: inline-block; width: 300px; font-family: Helvetica, Verdana, Arial, sans-serif; font-size: 15px;}
+.mediumsizelabel {width: 150px;}
+.smallsizelabel {width: 100px;}
+
+.smallicon {vertical-align: middle;}
+.nomargin {margin: 0px;}
+
+.gray{color: rgba(0,0,0,0.5);}
+.red, .errortext{color: red;}
+.blue{color: #5BA1D4;}
+
+.bold{ font-weight: bold; }
+.italic{ font-style: italic; }
+.boldAndItalic{	font-weight: bold;	font-style: italic;	margin: 0px; }
+
+/* Use these classes instead of inline styles if need to use quick and dirty divs/other elements
+   And to avoid cluttering other class/id styles with floats, cursors and stuff
+*/
+.floatLeft{float: left;}
+.floatRight{float: right;}
+.clearfix{clear: both;}
+
+.displayNone{display: none;}
+.displayBlock{display: block;}
+.displayInlineBlock{display: inline-block;}
+
+.positionRelative{position: relative;}
+
+.verticalAlignTop {vertical-align: top;}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.selectedListItem{background: #A9C0D6;}
+.pointerCursor{cursor: pointer !important;}
+.whitelink{color: white;}
+
+form select, select[disabled], .selectElement
+{
+	background: white;
+	border: 1px solid rgb(170, 170, 170);
+	height: 30px;
+	padding-top: 5px;
+}
+.multipleSelect, select[multiple] {min-height: 100px; max-height: auto;}
+select[disabled] {color: #1A1A1A;}
+.admin-tabs_content_container select, .updatePopup select {width: 200px;}
+.admin-tabs_content_container input[type="text"], .updatePopup input[type="text"] {width: 300px;}
+.workspace-tabs_content_container select {min-width: 178px;}
+
+form[name="ingest"] textarea {width: 57.6%;}
+.textsearch {width: 57%;}       /* 386px */
+.selectsearch {width: 58%;}     /* 393px */
+.textrelation {
+    width: 53.2%;               /* 355px 369 */
+    padding-right: 30px;
+}
+
+.multifield-container .textsearch,
+.nestedElement .textsearch  {width: 96.6%;}
+
+.multifield-container .selectsearch,
+.nestedElement .selectsearch,
+.onki-autocomplete-container .textsearch {width: 98.2%;}
+
+.multifield-container .textrelation,
+.nestedElement .textrelation {width: 90.1%;}
+
+.nestedElement.singlerow-nest .textsearch, 
+.nestedElement.singlerow-nest .selectsearch, 
+.nestedElement.singlerow-nest .textrelation {width: 48%;}
+
+form[name="ingest"] .browseBtn, .manualinherit {
+	position: absolute;
+	margin-left: 4px;
+}
+
+@media all and (max-width: 1160px) {
+    .textrelation,
+    .multifield-container .textrelation,
+    .nestedElement .textrelation {
+        width: 360px;
+    }
+}
+
+input[readonly], textarea[readonly],
+input[readonly]:focus, textarea[readonly]:focus
+{
+	background: rgba(220,220,220,0.2);
+	color: rgba(0,0,0,0.6);
+}
+
+/* Aligns element with the top of the following element if the following element is multi-row type */
+img + textarea, 
+span + textarea, 
+label + textarea,  
+label + .multipleSelect, 
+label + select[multiple] {
+	vertical-align: top;
+}
+
+span .helpicon {vertical-align: middle;}
+
+/*##################################*/
+
+/* 02. LAYOUT */
+
+.contentDiv {
+    margin: 0 auto;
+    padding:0 0 150px 0; /* Padding bottom (3rd value) must be equal or larger than footer's height */
+    position: relative;
+}
+
+.contentDiv, .header-image-main, .header-image {
+    min-width: 990px;
+    max-width: 70%;
+}
+
+#wrapper{
+    min-width: 1000px;
+    min-height: 100%;
+    position: relative;
+}
+
+#sidepanel-container, #sidepanel-container label {
+	background: #F2F2F2;
+	border-color: #aaa !important;
+	border-width: 1px !important;
+}
+
+#sidepanel-container {
+	padding: 5px;
+	width: 200px;
+    height: 500px;
+    position: fixed;
+    right: 0px;
+    bottom: 20%;
+    border: solid;
+    -webkit-transition: width 150ms ease-out;
+       -moz-transition: width 150ms ease-out;
+        -ms-transition: width 150ms ease-out;
+         -o-transition: width 150ms ease-out;
+            transition: width 150ms ease-out;
+}
+
+#sidepanel {
+	width: 100%;
+	height: 93%; 
+	overflow-y: hidden;
+}
+.sidepanel-item {
+    height: 50px;
+    border: solid 1px #aaa;
+    padding: 3px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    background: #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidepanel-item .latestedit-name {font-weight: bold;}
+.sidepanel-item .latestedit-date {font-size: 13px;}
+
+.sidepanel-item.latestedit-update {background: #edf8ff; border: 1px solid #46a3d3;}
+.sidepanel-item.latestedit-add {background: #ecffeb; border: 1px solid #64b657;}
+
+.sidepanel-item.latestedit-update:hover{background: #D4EEFF;}
+.sidepanel-item.latestedit-add:hover{background: #D1FCCF;}
+/* .sidepanel-item:hover,  */
+.sidepanel-showmore:hover{background: #BDBDBD;}
+.sidepanel-item:active, .sidepanel-showmore:active{background: #A8A8A8;}
+
+.sidepanel-header {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.sidepanel-showmore {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	min-width: 60px;
+	padding: 3px 5px 3px 5px;
+	background: #ccc;
+	font-size: 14px;
+	cursor: pointer;
+}
+#sidepanel-container label {
+	position: absolute;
+	width: 10px;
+	height: 30px;
+	top: 235px;
+	left: -11px;
+	color: #508AB5;
+	font-size: 20px;
+	font-weight: bold;
+	border-style: solid none solid solid;
+}
+.sidepanel-container-closed {width: 3px !important; padding: 0 !important;}
+.sidepanel-closed {display: none;}
+
+/* Opened sidepanel styles */
+.sidepanel-container-full {
+    position: fixed;
+    z-index: 90;
+    width: 50% !important;
+    min-width: 560px !important;
+    height: 350px !important;
+    top: 50%;
+    left: 25%;
+    margin-top: -150px;
+    box-shadow: 0 0 20px black;
+}
+.sidepanel-container-full label {display: none;}
+.sidepanel-container-full #sidepanel {overflow-y: auto;}
+
+.sidepanel-container-full .sidepanel-item {
+	width: 30%;
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+/* FORM ELEMENTS */
+
+/* Fieldset to separate form sections */
+.form-section {
+	border: none;
+	border-bottom: solid 1px rgb(200, 200, 200);
+	margin-bottom: 10px; 
+	width: 650px; 
+	padding: 5px;
+}
+.form-section.nested-form-section {
+	border: none;
+	background: #f9f9f9;
+	position: relative;
+	margin-left: -5px;
+}
+
+.form-section p {
+	padding: 0; 
+	margin: 0; 
+	margin-bottom: 8px;
+}
+.nested-form-section .deleteAccessRight {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+/* MAIN PAGE HEADER  */
+.header-image-container-main{
+	width: 100%;
+	height: 350px; 
+	display:block;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.header-image-main
+{
+	height: 298px;
+	margin: 0 auto;
+	padding-top: 50px;
+	position: relative;
+}
+
+.header-image-main label
+{
+	vertical-align: bottom;
+	font-size: 13px;
+	width: auto;
+	padding: 5px 10px;
+}
+
+#mainlogo {
+	width: 200px;
+	margin-top: 30px;
+	box-shadow: 0 0 20px #333333;
+}
+
+#mainpage-search{
+	position: absolute;
+	bottom: 50px;
+	width: 100%;
+}
+
+#mainpage-search-box, #freetext-searchbox
+{
+	width: 50%;
+	height: 35px;
+	padding-left: 10px;
+	font-size: 15px;
+}
+#freetext-searchbox{width: 500px;}
+
+#mainpage-search-button
+{
+	width: 68px;
+	height: 40px;
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+/* SMALL PAGE HEADER  */
+.header-image-container{
+	width: 100%;
+	height: 80px; 
+	display:block;
+	margin-bottom: 15px;
+	font-size: 12px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+.header-image
+{
+	height: 18px;
+	margin: 0 auto;
+	padding-top: 55px;
+}
+
+.menu-bar-container
+{
+	width: 100%;
+	min-height: 45px;
+	max-height: 90px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+}
+.menu-bar
+{
+	margin: 0 auto;
+	/* height: 31px; */
+	min-width: 990px; /* 1400px */
+	max-width: 90%;
+}
+
+.menu-bar ul
+{
+	/*list-style-type:none;*/
+	margin:0;
+	padding:0;
+}
+
+.menu-bar li
+{
+	display:inline-block;
+	margin-right: 35px;
+	padding: 0px 5px 0px 5px;
+	line-height: 35px;
+	padding-top: 5px;
+}
+
+.mainlink-li, .add-button-div, .horizontal-box-tab
+{
+	-webkit-transition: border 300ms;
+	   -moz-transition: border 300ms;
+        -ms-transition: border 300ms;
+         -o-transition: border 300ms;
+	        transition: border 300ms;
+}
+.menu-bar li#basket{margin: 0px;}
+.menu-bar li#loginli, .menu-bar li#logoutli
+{
+	float: right;
+	margin: 0px;
+}
+
+label#breadcrumb
+{
+	width: auto; 
+	padding-right: 5px;
+	font-size: 12px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+.pagehelp {
+	width: auto;
+	margin: 0px 0px 10px 30px;
+	font-size: 14px;
+	color: #aaa;
+}
+
+.header-hr {
+	width: 100%;
+	height: 1px;
+	margin-bottom: 25px;
+	margin-top: 10px;
+	background: #aaa;
+}
+
+/*#####################################*/
+
+/* 03. POPUP WINDOW FOR TREE VIEW BROWSING */
+#browsingDiv{
+	position:fixed;
+	display:none;
+	z-index:91;
+	width:50%;
+	height:640px;
+	top:10%;
+	left:50%;
+	margin-left:-25%;
+	box-shadow:0 0 10px #333333;
+	background: white;
+	cursor: move;
+}
+
+#browsingDivContent
+{
+	width: 97%;
+	height: 95%;
+	padding:10px;
+}
+
+#closeBrowsingDiv, #metadataexit, .close-popup
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+#browseTree, #filteredRelationContainer{
+	margin-left:5px;
+	overflow:auto;
+	max-height:70%;
+	font-size: 13px;
+	padding-left: 10px;
+	cursor: default;
+}
+#browseFooter{margin-bottom: 5px; margin-top: 5px;}
+#filteredRelationContainer{display: none;}
+#relationTermContainer{position: relative; width: 400px; height: 30px;}
+
+#relationTerm
+{
+	width: 350px;
+	padding-right: 25px;
+}
+
+#filteredRelation
+{
+	list-style: none;	
+	padding-left: 23px;
+	color: rgb(28,66,87);
+}
+#filteredRelation li{padding-bottom: 3px;}
+#filteredRelation li:hover{color: rgba(28,66,87,0.7);}
+#filteredFound {
+	margin-top: 5px;
+	margin-left:5px;
+	overflow:auto;
+	max-height:70%;
+	font-size: 13px;
+	padding-left: 10px;
+	cursor: default;
+	}
+#clearFilter, #relationFilterLoader {
+	position: absolute;
+	top: 6px;
+}
+#clearFilter {right: 26px;}
+#relationFilterLoader {right: -2px;}
+
+/*#####################################*/
+
+/* 04. FULL SCREEN MODAL WINDOW */
+.modal {
+/*     display:    none; */
+    position:   fixed;
+    z-index:    89;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 0, 0, 0, .3 ); 
+/*                 url('../img/ajax-loader.gif') 
+                50% 50% 
+                no-repeat; */
+}
+
+#modalload{
+	z-index:91;
+	width:20%;
+	height:15%;
+	top:50%;
+	left:50%;
+	margin-left:-10%;
+	margin-top:-7%;
+	text-align:center;
+	border:solid 1px #000;
+	box-shadow:0 0 20px #000;
+	background: rgb( 238, 233, 233)
+                url('../img/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+	
+}
+body.loading {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
+}
+/*#####################################*/
+
+/* 05. FEEDBACK-RELATED ELEMENTS */
+#feedbackdiv{
+	display:none;
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	width:100%;
+	height:100%;
+	background-color:white;
+	z-index:90000;
+}
+
+.feedbackInfobar
+{
+	width: 100%;
+	color: black;
+	font-size: 11pt;
+	background: rgba(0,170,0,0.7);
+	box-shadow:	0 0 50px #004D00 inset;
+	text-align: center;	
+	line-height: 35px;
+}
+
+#feedbackctrl{
+	padding: 5px;
+	position: fixed;
+	width: 300px;
+	height: 500px;
+	bottom: 50px;
+	right: 10px;
+	background-color: white;
+	border: solid 1px black;
+	font-size: 12px;
+	box-shadow: 0 0 30px rgb(0,80,0);
+	cursor: move;
+}
+
+#feedbackctrl input[type="text"]{width: 290px;}
+#feedback-brushsize {width: 40px;}
+#feedbackctrl textarea{
+	width: 295px;
+	height: 160px;
+	resize: none;
+}
+
+label[for="anonymousFeedback"] {
+	width: 150px;
+	line-height: 20px;
+	vertical-align: top;
+}
+
+#feedbacklist {
+	overflow:hidden;
+	width:100%;
+}
+
+table.feedbacktbl {
+	table-layout:fixed;
+    width:100%;
+    padding:2px	
+}
+
+table.feedbacktbl th {
+	font-weight:bold;
+	padding:0 0 4px 0;
+	text-align:left;
+}
+
+table.feedbacktbl td {
+	border:solid 1px #ccc;
+	padding:8px;
+	word-wrap:break-word;
+}
+
+table.feedbacktbl a {
+   font-style:italic;
+   text-decoration:underline;
+   margin-bottom:4px;
+}
+
+table.feedbacktbl pre {
+    margin: 4px 0;  
+}
+
+table.feedbacktbl button {
+	display:block;
+	margin: 4px 0;	
+}
+
+/*#####################################*/
+
+/* 06. NOSCRIPT, LOG IN ERRORS & MESSAGES */
+noscript
+{
+	display: block;
+	width: 100%;
+	color: #ccc;
+	text-shadow: 0 0 2px #333333;
+	font-size: 15px;
+	background: rgba(255,0,0,0.7);
+	box-shadow:	0 0 50px #800000 inset;
+	text-align: center;	
+	line-height: 23px;
+}
+.errordiv{
+	display:none;
+	font-size:16px;
+}
+.errordiv p{
+	padding:0px;
+	margin:0px;
+}
+.errordivicon{
+	margin-right:10px;
+	width:32px;
+	height:32px;
+	float:left;
+	vertical-align:text-top;
+}
+.errordivtext{
+	float:left;
+}
+
+/* Messages */
+
+/* Default stripes message markup*/
+ul.messages {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.messages-container {
+	max-width: 500px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.messages-body {
+	min-height: 25px;
+	padding: 7px 5px 2px 5px;
+}
+.messages-content {margin-left: 5px;}
+.messages-icon {
+	width: 20px; 
+	height: 20px;
+}
+
+.message-success .messages-icon{background: url("../img/icons/silk/tick.png") no-repeat center;}
+.message-information .messages-icon{background: url("../img/icons/silk/information.png") no-repeat center;}
+
+.message-success {
+	background: #ecffeb;
+	border: 2px solid #64b657;
+	color: #358927;
+}
+
+.message-information {
+	background: #edf8ff;
+    border: #46a3d3 solid 2px;
+    color: #085b8f;
+}
+/*#####################################*/
+
+/* 07. FRONT PAGE CHANGE LOG */
+.latest-changes legend {
+	font-size: 25px;
+	font-family: 'Roboto';
+	font-weight: bold;
+}
+
+.past-changes
+{
+	display: none;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+#past-changes-fieldset{margin-bottom: 50px;}
+
+/*#####################################*/
+
+/* 08. FACETS & SEARCH RESULTS */
+
+#resultDiv {
+	width: 80%;
+	position: relative;
+}
+/* To handle narrower windows */
+@media all and (max-width: 1670px) {
+    #resultDiv {
+       width: 77%;
+    }
+}
+
+fieldset.content-types {
+	width: 330px;
+}
+
+/* Processing window for search */
+#processing {
+	width: 400px;
+	height: 180px;
+	background: white;
+	border: solid 1px #aaa;
+	color: rgb(100,100,100);
+    position: absolute;
+    z-index: 91;
+	left: 50%;
+	top: 100px;
+	margin-left: -200px; /* Offset for adjusting percentual horizontal positioning, for centered, use half the width */
+	display: none;
+}
+
+#processing-content{
+	width: 80%;
+	height: 80%;
+	padding: 5px;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 12px;
+}
+
+#processing-content img {
+	position: absolute;
+	right: 80px;
+	top: 20px;
+}
+
+/* SEARCH RESULT TABLE */
+#searchresulttable tbody, .watchtable tbody {border-left: solid 1px #ccc; border-right: solid 1px #ccc;}
+
+#searchresulttable .odd, .watchtable .odd {background: #F2F2F2 !important;}
+#searchresulttable .even, .watchtable .even {background: white;}
+/* Highlighting the sorting column */
+#searchresulttable tr.even td.sorting_1, 
+#searchresulttable tr.odd td.sorting_1 {
+    background: none;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+}
+
+/* Search result table header & footer */
+#searchresulttable_wrapper .ui-widget-header, 
+.workspace-tabs_content_container .dataTables_wrapper .ui-widget-header{
+	background: #E6E6E6;
+	border: solid 1px #ccc;
+	border-radius: 0px;
+	color: #333333;
+}
+
+#searchresulttable_wrapper .ui-button, 
+.workspace-tabs_content_container .dataTables_wrapper .ui-button {
+	border-radius: 0px; 
+	border: solid 1px #ccc;
+}
+
+#searchresulttable_wrapper .ui-button:hover, 
+.workspace-tabs_content_container .dataTables_wrapper .ui-button:hover {
+	background: #508AB5;
+}
+
+/* Search result table button's default state */
+#searchresulttable_wrapper .ui-button.ui-state-default,
+.workspace-tabs_content_container .dataTables_wrapper .ui-button.ui-state-default{
+	background: #5BA1D4; 
+	color: white !important;
+}
+
+.relevancy-indicator {
+	display: inline-block;
+	width: 80px;
+	text-align: center;
+}
+
+#searchresultcontainer {
+	display: none;
+	height: 100%;
+	position: relative;
+}
+
+.searchcontainer-open {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: solid 2px #aaa;
+}
+
+#searchresult-header-bar {
+	margin-bottom: 10px;
+}
+
+#searchresult-header-bar .item {
+	float: left;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: solid 1px #aaa;
+}
+
+#showrecords-container {
+	padding-top: 5px;
+	height: 28px;
+}
+
+#searchresult-left-container {
+	height: 100%;
+    width: 215px;
+    position: relative;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.facets-window-container {
+    border: solid 1px #ccc;
+    background: #F2F2F2; /*E6E6E6*/
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.facets-window-container a{font-size: 13px;}
+.facets-window-container a:hover, #clearfacets:hover {text-decoration: underline;}
+
+.facet-container
+{
+    width: 80%;
+    height: 160px;
+    position: relative;
+	margin-bottom: 35px;
+    margin-left: 10px;
+}
+
+.facet {
+	height: 100%;
+    overflow-y: hidden;
+}
+
+#activefacets-container, #searchparameters-container {
+	border-bottom: solid 1px #ccc;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+#activefacets-container{display: none;}
+
+.showallfacets {
+	position: absolute;
+	bottom: -20px;
+    color: #5BA1D4;
+}
+.showallfacets:hover {color: #508AB5;}
+.facet-open {height: auto !important;}
+
+.selectedfacet {display: block;}
+
+.selectedfacet, 
+.selectedfacet .undefined-facet, 
+.facetvalue, 
+.facetvalue a
+{
+	color: #5BA1D4;
+	font-size: 13px;
+}
+
+.floating {
+    position: fixed !important;
+    top: 10px;
+}
+
+#activefacets a:before, .selectedfacet:before {
+	content: "X ";
+	color: red;
+}
+
+.facetname, .facets-header
+{
+	width: 100%;
+	color: #333333;
+	font-weight: bold;
+}
+
+.facetname {margin-bottom: 5px;	}
+
+.facets-header {
+    margin-bottom: 10px;	
+    font-size: 16px;
+}
+
+.facetvalue {
+	margin-left: 10px;
+    width: auto;
+    display: block;
+}
+
+.facetlink{width: 100%;}
+.facetlink a {color: #646464;}
+.facetcount{color: #aaa; font-size: 13px;}
+.undefined-facet {color: #aaa !important;}
+
+.removefacets a, .removefacets, #clearfacets {
+	color: red;
+	font-size: 13px;
+	width: auto;
+}
+.removefacet:hover,
+#clearfacets:hover, 
+#activefacets label:hover {color: rgb(200,0,0); cursor: pointer;}
+
+#clearfacets {
+	display: none;
+	margin-top: 10px;
+}
+
+.showrecords {
+	width: 22px;
+	height: 17px;
+	padding: 3px;
+	text-align: center;
+	margin-right: 5px;
+	background: #5BA1D4;
+	color: white;
+	border: solid 1px #5BA1D4;
+	font-size: 13px;
+}
+.showrecords:hover{background: #508AB5;}
+.showrecords-selected {background: #417296;}
+
+.ancestor-title{
+    display: block;
+    width: auto;
+}
+.ancestor-title, .ancestor-title a
+{
+    font-style: italic;
+    color: gray;
+    font-size: 12px !important;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.facetviewcontainer
+{
+	background: white;
+	display: none;
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: -50px;
+	z-index: 91;
+	box-shadow: 0 0 10px black;
+}
+
+a.previousSearchLink{font-size: 13px;}
+a.previousSearchLink:hover{text-decoration: underline;}
+
+/*#####################################*/
+
+/* 09. INGEST PAGE ELEMENT STYLING */
+
+/* Div to hold a row in ingest form */
+.ingest-form-row {
+	margin: 16px 0;
+}
+
+.ingestfieldlabel{
+	margin-left: 321px;
+	width: auto;
+}
+
+.timeRangeSelectContainer{
+	position: relative;
+	margin-top: 10px;
+}
+.timeRangeSelectContainer .displayInlineBlock {
+	height: 60px; 
+	width: 130px;
+}
+
+#timeRangeSelect {
+    margin-top: 5px;
+}
+
+.ingest-header-container
+{
+	width: 100%;
+	position: relative;
+	height: 15px;
+}
+
+.ingest-header-container img  {
+	margin-left: 5px;
+}
+
+#addingMetadata, #updatingMetadata {
+	width: 30%;
+	height: 50px;
+	position: fixed;
+	z-index: 90;
+	display: none;
+}
+
+.object-container
+{
+	display: inline-block;
+	padding: 10px;
+/* 	background: #5BA1D4; */
+	min-width: 20px;
+	max-width: 750px;
+	z-index: 10;
+}
+
+#childobjects { display: block; }
+
+#metadatafiles {
+	max-width: 300px;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#childobjects.object-container a:hover {text-decoration: underline;}
+
+#childobjects.object-container, #metadatafiles.object-container {
+	max-height: 700px;
+	overflow-y: auto;
+}
+#orig-thumbnail-container {display: none;}
+#orig-thumbnail-container.view-only {display: inline-block;}
+#orig-thumbnail-container img, #att-thumbnail-container img.thumbnail-image {
+	display: block; 
+	margin-bottom: 10px;
+	border: 5px solid white;
+	box-shadow: 0 0 10px #BFBFBF;
+}
+
+#orig-thumbnail-container, #metadatafiles{
+    position: absolute;
+    right: 5px;
+    margin-top: 5px;
+}
+/* Moves the thumbnail from side to top of the form when window is narrow enough */
+@media all and (max-width: 1680px) {
+    #orig-thumbnail-container, #metadatafiles{
+       position: relative;
+       left: 1%;
+       max-width: 700px;
+    }
+    /* Changes images from block to inline-block elements so they float next to each others */
+    #orig-thumbnail-container img {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    #metadatafiles {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+}
+.attimgcontainer
+{
+	display: inline-block;
+	position: relative;
+	margin-right: 5px;
+}
+.attimgcontainer:last-child{margin-right: 0px;}
+
+.deleteattachmentbtn
+{
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	opacity: 0.4;
+}
+
+.fielderror, .fielderrorwithimg, :required
+{
+    border: solid 1px red !important;
+    box-shadow: 0 0 5px red;
+}
+.fielderrorwithimg{background: url(../img/icons/silk/error.png) no-repeat scroll 97% 5px;}
+.fielderror:focus{border: solid 1px red;}
+.fieldloaderwithimg{background: url(../img/ajax-loader-arrow.gif) no-repeat scroll 97% 5px;}
+
+#button-row {margin-left: 20px;}
+
+/*	Upload  */
+#file-uploader, #attachment-uploader{width: 715px;}
+#file-uploader{display: none;}
+
+.object-container, .object-container a, .download-container a, .download-container {font-size: 14px;}
+.download-container img{ opacity: 0.7;}
+.download-container img:hover{ opacity: 1; }
+.deleteattachmentbtn:hover{	opacity: 1; }
+.thumbnail-image:hover{	opacity: 0.8; }
+img.helpicon{ opacity: 0.5; }
+img.helpicon:hover{ opacity: 1; cursor: help; }
+
+/* Hover tooltip for elements that have "data-tooltip"-attribute */
+[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    max-width: 500px;
+    min-height: 25px;
+    background: #F2F2F2;
+    border: solid 1px #aaa;
+    font-size: 15px;
+    margin-left: 4px;
+    margin-top: -2px;
+    padding: 6px 6px 0px 6px;
+    z-index: 89;
+}
+
+/*#####################################*/
+
+/* 10. TABS LAYOUT */
+/* http://www.lessthanweb.com/blog/simple-css-tabs-with-jquery */
+#tabs_wrapper {
+    min-width: 1010px;
+    max-width: 100%;
+    min-height: 500px;
+    max-height: auto;
+}
+/* To remove margin and join wrapper with horizontal separator to make tabs look better 
+   The negative margin-top value must match the margin-bottom value of .header-hr class */
+.header-hr + #tabs_wrapper, .header-hr + form #tabs_wrapper {margin-top: -25px;}
+
+#tabs_container {
+    width: 200px;
+    padding: 0 0 10px 0;
+    float: left;
+}
+
+#tabs_content_container {
+    padding-top: 10px;
+    float: left;
+}
+.ingest-tabs_content_container {
+    width: 810px;
+}
+.workspace-tabs_content_container,
+.admin-tabs_content_container {width: 80%;}
+
+.tab-item {
+	border: solid 1px #aaa;
+    background: #F2F2F2;
+    padding-top: 15px;
+    padding-left: 10px;
+    cursor: pointer;
+    font: 0.75em arial;
+}
+
+.tab-item:hover {background: #E6E6E6;}
+.tab-item.active:hover, .tab-item.activetab:hover{background: white;}
+
+.horizontal-box-tab {
+	width: 110px;
+	min-height: 90px;
+	border: solid 1px #aaa;
+    background: #F2F2F2;
+    display: inline-block;
+    margin-right: 30px;
+    text-align: center;
+    padding: 3px;
+}
+/* To to remove unnessary margin after the last tab. 
+ * Note, for this to work there must not be any other element(s) after the last element with the class "horizontal-box-tab" in their container element 
+ */
+.horizontal-box-tab:last-child {margin-right: 0px;}
+
+#tabs {
+    list-style: none;
+    padding: 0px 0 4px 0;
+    margin: 0px;
+}
+#tabs li {
+	height: 30px;
+    margin-top: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#tabs li a {
+    padding: 8px 0px; 
+    text-decoration: none;
+    outline: none;
+    margin-left: -4px;
+}
+
+#tabs li.active {
+	border-right: none;
+	background: white;
+}
+
+#tabs li a.icon_accept {
+    background-image: url(accept.png);
+    background-position: 5px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+}
+#tabs li a.icon_accept:hover {
+    padding-left: 24px;
+}
+/* Set all tab content divs hidden */
+#tabs_content_container .tab_content{
+	display: none;
+	min-height: 331px;
+	padding-left: 20px;
+	position: relative;
+}
+/* Then set the first visible */
+#tabs_content_container .tab_content:first-child {
+	display: block;
+}
+/* View only page tabs container */
+#tabs_content_container.view-only {
+	width: 67%; 
+	min-width: 810px;
+}
+
+/* Creates a dim row separator between view form's rows */
+.view-form-row-container {
+	border-bottom: 1px solid #DEDEDE;
+	padding-bottom: 5px;
+	position: relative;
+}
+
+#tabs_content_container.view-only #original .view-form-row-container,
+#tabs_content_container.view-only #original p,
+#tabs_content_container.view-only #attachments .view-form-row-container,
+#tabs_content_container.view-only #attachments p,
+#tabs_content_container.view-only #groups p,
+#tabs_content_container.view-only #content p {
+    border-bottom: none;
+}
+
+#tabs_content_container.view-only .textarea-div {
+	max-height: 800px;
+    white-space: pre-wrap;
+    overflow-y: auto;
+}
+
+/* View page's nested & multifield elements */
+
+#tabs_content_container.view-only .textarea-div,
+#tabs_content_container.view-only .multifield-container,
+#tabs_content_container.view-only .temporal-range-container,
+#tabs_content_container.view-only .nested-element-container,
+#tabs_content_container.view-only span {
+	display: inline-block;
+	max-width: 61%;
+	font-size: 14px;
+}
+ 
+#tabs_content_container.view-only .nested-element-container,
+#tabs_content_container.view-only .nestedElement,
+#tabs_content_container.view-only .multifield-container,
+#tabs_content_container.view-only .temporal-range-container {
+    float: none;
+}
+ 
+#tabs_content_container.view-only .textarea-div {margin: 5px 0px;}
+
+#tabs_content_container.view-only .nestedElement {width: auto;}
+#tabs_content_container.view-only .nestedElement p {margin: 0;}
+
+/* Ingest page nested & multifield */
+.nested-element-container {width: 100%;}
+
+.temporal-range-container,
+.multifield-container,
+.nestedElement {
+	width: 59%;
+	float: right;
+}
+
+.temporal-range-container .datepicker {width: 46.2%;}
+
+.multifield-container .multifieldElem,
+.nestedElement.multifieldElem {
+	margin-bottom: 10px;
+}
+
+.multifield-container .multifieldElem:last-child {
+	margin-bottom: 0px;
+}
+
+.nestedElement p {
+	margin-top: 0px;
+    margin-bottom: 5px;
+}
+.add-nested-element{
+    margin-left: 323px;
+}
+.add-nested-element, .add-multifield-element{
+	margin-bottom: 10px;
+	color: #508AB5;
+	width: auto;
+}
+.add-multifield-element {margin-bottom: 0;}
+.toggle-onki-search-form {margin-bottom: 10px;}
+
+.delete-multifield-element,
+.delete-nested-element{
+	position: absolute;
+}
+.delete-nested-element {
+    bottom: 30px;
+    left: -20px;
+}
+
+.delete-multifield-element {
+    left: -20px;
+    top: 5px;	
+}
+
+.onki-autocomplete-container {
+	width: 58%;
+}
+
+.onki-autocomplete-form {
+	display: none;
+	height: auto;
+	width: 98%;
+	position: absolute;
+	left: 0;
+	top: 30px;
+	background: #F2F2F2;
+	padding: 15px 5px 5px;
+	box-shadow: 0px 7px 7px #ccc;
+	border: 1px solid #ccc;
+	z-index: 10;
+}
+
+.onto_results select {
+	width: 100%;
+	height: 200px;
+}
+
+.onto_results select option{
+	padding: 1px 3px;
+}
+
+.onki_selected_term, .onto_results_amount {
+	font-size: 13px;
+}
+
+.onki_selected_term {
+	display: inline-block;
+	position: relative;
+	margin-right: 10px;
+	border: solid 1px #ccc;
+	background: #F2F2F2;
+	padding: 2px 18px 2px 5px;
+	margin-bottom: 5px;
+	max-width: 200px;
+}
+
+.view-form-row-container .onki_selected_term {
+	background: white;
+	padding: 0;
+	margin-bottom: 0;
+	border: none;
+	max-width: 200px !important;
+	vertical-align: middle;
+}
+
+.onto_results_amount {
+	display: none;
+	margin: 2px 0px;
+}
+
+.close-onki-form {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 10px;
+}
+
+.onto-delbtn {
+	color: red;
+	font-weight: bold;
+	cursor: pointer;
+	position: absolute;
+	right: 4px;
+	top: 2px;
+}
+
+#orgHistoryGraph{
+	width: 100%;
+	height: 200px;
+}
+#viewAddMenu{
+	font-size:12px;
+	float:right;
+}
+
+/*#####################################*/
+
+/* 11. BROWSE PAGE */
+.openHelp
+{
+	font-size: 10.5pt;
+	margin-bottom: 20px;
+	width: auto;
+}
+
+.openHelp:hover{text-decoration: underline;}
+
+#helpform
+{
+ 	border: dotted 1px #A9C0D6;
+	font-size: 10.5pt;
+	display: none;
+	margin-bottom: 10px;
+	padding: 5px 5px 0px 5px;
+}
+#treeviewContainer
+{
+	border-top: solid 1px #A9C0D6;
+	padding-top: 5px;
+}
+
+#masonryContainer
+{
+	width:70%;
+	float: right;
+}
+
+#masonryMenubar
+{
+	width: 500px;
+}
+
+#masonryView{
+	overflow-y:auto;
+	min-height:770px;
+	max-height: 1000px;
+	width:100%;
+	font-size:12px;
+}
+#collectionTreeResizable
+{
+	width: 285px;
+	height: 800px;
+	float:left;
+	padding-right: 10px;
+	border-right:solid 1px #A9C0D6;
+}
+
+#collectionTree{
+	font-size:12px;
+	padding: 0px 5px 0px 5px;
+	white-space: nowrap;
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+}
+
+#addElementMenu{
+	font-size:10px;
+	display: none;
+}
+.viewItem{
+  	width: 100px;
+  	margin: 10px;
+	float: left;	
+	border-radius:2px;
+	padding: 5px;
+	text-align:center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.viewItem:hover{
+	box-shadow:0 0 2px #000;
+}
+
+.icon img{
+	vertical-align:middle;
+	margin:2px 5px 2px 0px;
+}
+.rightclickmenu{
+	position:absolute;
+	margin-left: 20px;
+	padding: 5px;
+	z-index: 90;
+	background:white;
+	border:1px solid black;
+	display:none;
+}
+/*#####################################*/
+
+/* 12. DIALOG ELEMENTS */
+#dialog, #moveConfirmDialog, #moveAlertDialog{display: none;}
+.confirmicon
+{
+	float: left;
+	width: 32px;
+	height: 40px;
+	background: url("../img/icons/silk32/information.png") no-repeat 0px 50%;
+	margin-right: 10px;
+}
+
+.confirmtext
+{
+	float: left;
+	min-width: 200px;
+	max-width: 600px;
+	min-height: 40px;
+}
+
+.deletelistitem{font-size: 16px; margin-left: 5px;}
+.feedbackInfobarDialog{z-index: 999999 !important;}
+#moveAlertDialog, #moveConfirmDialog{font-size: 16px;}
+
+#moveAlertDialog img
+{
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.cancelButton, .confirmButton
+{
+	color: black !important;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5) inset !important;
+}
+.cancelButton{background: rgba(255,0,0,0.8) !important;}
+.confirmButton{background: rgba(0,150,0,0.8) !important;}
+
+/*#####################################*/
+
+/* 13. WORKSPACE ELEMENTS */
+/* base style for workflow progress bars */
+.workflow-base {
+	border:1px solid black;
+	font-size:12px;
+	border-radius:3px;
+	margin:2px;
+}
+/* Styles for different states of workflow progress bars */
+.workflowrunning{	background:url(../img/ajax-loader.gif) no-repeat 955px 5px;}
+.workflowwaiting{	background-color:grey;}
+.workflowcompleted{	background-color:green;}
+.workflowinput{		background-color:skyblue;}
+.workflowcanceled{	background-color:yellow;}
+.workflowerror{		background-color:red;}	
+
+.watchtable{
+	border-collapse: collapse;
+	border: solid 1px #ccc;
+	min-width: 550px;
+}
+
+.watchtable {height:20px;}
+
+.watchtable td {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px;
+    font-size: 12px;
+}
+
+#watchtabcont{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.watchtabctrl{
+	height: 30px;
+	min-width: 100px;
+	margin-right: -5px;	
+	display: inline-block;
+	text-align: center;
+	padding: 0;
+	padding-top: 15px;
+}
+.activetab{
+	border-bottom: none;
+	cursor:default;
+	background: white;
+}
+.workspacetab{
+	display: none;
+	margin-top: 10px;
+	position: relative;
+}
+.watchheader, .watchtable thead{
+	cursor:pointer;
+	font-size: 14px;
+	font-weight: normal;
+}
+.watchtable tbody tr:hover{
+	color: black;
+	cursor: pointer;
+}
+#metadatadiv{
+	width: 800px;
+	height: 330px;
+    border: 1px solid #aaa;
+	padding: 10px;
+	background: white;
+	display: none;
+	position: fixed;
+	z-index: 90;
+	bottom: 50%;
+	left: 50%;
+	margin-left: -400px;   /* Use half the width to center the element */
+	margin-bottom: -165px;
+}
+#metadatadiv .floatRight {margin-top: 20px;}
+#filesToEdit p {
+	margin: 0;
+	margin-bottom: 5px;
+}
+#filesToEdit {
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+	font-size: 13px;
+	max-height: 270px;
+	overflow-y: auto;
+}
+
+.add-button-container {
+	border-bottom: solid 2px #aaa;
+	margin-bottom: 10px;
+}
+.add-button-div {
+	display: inline-block;
+	position: relative;
+	width: 100px;
+	min-height: 80px;
+	border: solid 1px #ccc;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 3px;
+	text-align: center;
+}
+.add-button-div:hover, .horizontal-box-tab:hover{
+	border: solid 1px #5BA1D4;
+}
+.add-button-div.disabled:hover {border: solid 1px #ccc
+}
+.add-button-div span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+}
+.add-button-div.disabled {color: #ccc;}
+
+/*#####################################*/
+
+/* 14. DATATABLES STYLES */
+#baskettable, #disposaltable{
+	border-collapse: collapse;
+}
+
+.relative-td-fix {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.datatables-td-container {
+	color: rgba(150,150,150,1);
+	font-size: 14px;
+	height: 100%;
+	position: relative;
+	margin-left: 10px;
+}
+
+.datatables-td-container img {
+	position: absolute;
+	bottom: 5px;
+}
+
+.basketaction, #disposaltable .delete {right: 5px;}
+#disposaltable .cancel {right: 25px;}
+
+.datatables-td-container a:hover {
+	text-decoration: underline;
+	color: #5BA1D4;
+}
+.datatables-header {color: #5BA1D4;}
+.datatables-td-container .datatables-header {
+	margin: 0 0 7px;
+	color: #5BA1D4;
+}
+
+#baskettable td, #disposaltable td  {
+	background: white;
+	vertical-align: top;
+}
+
+#baskettable td:first-child, 
+#disposaltable td:first-child {
+	width: 10px;
+	padding: 0;
+}
+#baskettable tr, #disposaltable tr {
+/*     height: 100px; */
+}
+
+#baskettable thead, #disposaltable thead {
+	display: none;
+}
+
+#baskettable td, #disposaltable td {
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	padding: 10px 5px 5px 5px;
+	border-bottom: 1px solid grey;
+	font-size:11px;
+}
+#usertable td .usericon {
+	float:left;
+	margin-right: 5px;
+}
+#usertable td img + div {
+	float: left;
+}
+.datatable-tools.users,
+.datatable-tools.roles {
+    margin-left: 6px;	
+}
+
+#usertable-loader, .workflowtable-loader {
+	position: absolute;
+	left: 50%;
+	top: 160px;
+	margin-left: -16px;
+	z-index: 50;
+}
+.workflowtable-loader {
+	display: none;
+	background: white;
+	border: solid 1px #aaa;
+	color: rgb(100,100,100);
+	width: 150px;
+	height: 80px;
+	margin-left: -75px;
+	text-align: center;
+}
+.workflowtable-loader img {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	margin-left: -16px;
+}
+.worflowtable-loader-text {
+	width: 60px;
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	margin-left: -30px;
+}
+
+#workflowtable-loader-import{top: 100px;}
+#workflowtable-loader-ingest{top: 150px;}
+#workflowtable-loader-queue	{top: 50px;}
+#workflowtable-loader-log	{top: 50px;}
+
+.select-user {margin-top: 10px;}
+.delete-user {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: none;
+}
+
+.edit-user:hover,
+.delete-user:hover,
+.edit-role:hover {text-decoration: underline;}
+.delete-user:hover {color: red;}
+
+.admin-datatable {border: solid 1px #aaa; min-width: 700px;}
+.admin-datatable td {
+	background: white;
+    border: solid 1px #aaa; 
+    padding: 0px !important; 
+    padding: 2px 5px !important;
+    font-size: 14px;
+}
+.admin-datatable thead {
+	background: #F2F2F2;
+	height: 30px;
+	border: solid 1px #aaa;
+}
+
+.selected-row {background: #F2F2F2 !important;}
+
+.admin-datatable .username {font-size: 16px;}
+.info-small {font-size: 13px;}
+
+#disposaltable .displayInlineBlock + .displayInlineBlock {
+	font-size: 13px;
+	color: #5BA1D4;
+	margin-left: 10px;
+}
+/* If there are multiple accessright-containers after each other, put margin between them */
+.accessright-container + .accessright-container {margin-top: 15px;}
+
+.datatable-tools {
+	padding: 10px 0px 10px 0px;
+	margin-bottom: 20px;
+}
+
+.shortCol {width: 100px;}
+.centered-td, th{text-align: center;}
+.vertical-middle-td {vertical-align: middle !important;}
+.vertical-top-td {vertical-align: top !important;}
+
+/*#####################################*/
+
+/* 15. ADMIN.JSP STYLES */
+.updatePopup, #add-group-popup {
+    position: fixed;
+	background: white;
+    box-shadow: 0 0 10px #333333;
+    z-index: 90;
+}
+
+.updatePopup {
+	width: 680px;
+	max-height: 700px;
+	top: 100px;
+	left: 50%;
+	margin-left: -340px;
+	padding: 5px 5px 10px 10px;
+	overflow-y: auto;
+}
+
+#add-group-popup {
+    display: none;
+    padding: 10px;
+    top: 30%;
+    left: 50%;
+    width: 660px;
+    height: 150px;
+    margin-left: -330px;
+}
