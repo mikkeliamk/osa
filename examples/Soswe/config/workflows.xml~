@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <workflows>
+        <workflow name="Pre-ingest" defaultAction="yes" description="Generating metadata and previews" >
+            <options>
+                <mongoHost option="127.0.0.1" />
+                <mongoPort option="27017" />
+                <mongoDBName option="db" />
+            </options>
+            <task name="VirusCheck" important="true" />
+            <task name="GeneratePreview" important="true" />
+            <task name="SaveToMongo" important="true" />
+        </workflow>
+        <workflow name="Batch-ingest" defaultAction="yes" description="Generating metadata and previews" >
+            <options>
+                <mongoHost option="127.0.0.1" />
+                <mongoPort option="27017" />
+                <mongoDBName option="db" />
+            </options>
+            <task name="SaveToMongo" important="true" />
+        </workflow>
+        <workflow name="Zip" defaultAction="yes" description="Downloading object" >
+            <task name="Compress" important="true" />
+        </workflow>
+    </workflows>
+</root>
