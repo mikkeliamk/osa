@@ -28,9 +28,9 @@
             createBreadcrumbAndPageTitle("<fmt:message key='link.admin'/>", "<fmt:message key='link.admin'/> | " + document.title);
 
             setDatatablesDefaults(function(){
-	            showUserTable();
-	            showRoleTable();
-	            showGroupsTable();
+                showUserTable();
+                showRoleTable();
+                showGroupsTable();
             });
             
             $("#dialog").dialog({
@@ -45,14 +45,14 @@
             });
             
             $(".close-popup").click(function(){
-            	modalWindow(false);
-            	$(this).parent().hide();
-            	disablePopup();
+                modalWindow(false);
+                $(this).parent().hide();
+                disablePopup();
             });
             
             $(".form-section").on("click", "#add-group-btn", function(){
-            	modalWindow(true);
-            	$("#add-group-popup").show();
+                modalWindow(true);
+                $("#add-group-popup").show();
             });
             
             $(".popup-update-btn").click(function(){
@@ -61,9 +61,9 @@
             
             $("select#organizations").change(function() {
                 if (this.value != "") {
-                	if ($("#loadingroles").length == 0) {
-                		  $(this).after(" <img src='img/ajax-loader-arrow.gif' class='smallicon' id='loadingroles'/>");
-                	}
+                    if ($("#loadingroles").length == 0) {
+                        $(this).after(" <img src='img/ajax-loader-arrow.gif' class='smallicon' id='loadingroles'/>");
+                    }
                     getOrgGroupsForSelect(this.value, $("select#groups"));
                     
                     $.getJSON("User.action?findRoles=",{userOrganization: this.value, ajax: 'true'}, function(roles){
@@ -77,33 +77,33 @@
                 }
             });
             
-        	//Buttons call popup windows
-            $("#addOrganizationRoleBtn").click(function() {            	
-           		loadPopup("#addOrganizationRole");     
-           		$('#addRoleForm').reset();
-            	return false;
-           	});
+            //Buttons call popup windows
+            $("#addOrganizationRoleBtn").click(function() {
+                loadPopup("#addOrganizationRole");     
+                $('#addRoleForm').reset();
+                return false;
+            });
             
-           	$("#addUserBtn").click(function() {           		
-           		loadPopup("#addUser"); 
-           		$('#addUserForm').reset();
-           		return false;
-        	});
+            $("#addUserBtn").click(function() {
+                loadPopup("#addUser");
+                $('#addUserForm').reset();
+                return false;
+            });
            	
-            $("#addUserGroupBtn").click(function() {              	
-           		loadPopup("#add-group-popup"); 
-           		$('#add-group-ajax').reset();
-            	return false;
-        	});
+            $("#addUserGroupBtn").click(function() {
+                loadPopup("#add-group-popup"); 
+                $('#add-group-ajax').reset();
+                return false;
+            });
             
             // Set organization if using instance admin user
-            $("#organizations").change(function() {
+            $("#currentOrganization").change(function() {
                 $.ajax({
                     url: "User.action?setOrganization=",
                     data: {userOrganization: $(this).val(), ajax: 'true'},
                     dataType: "text",
                     success: function(data){
-                    	document.location.reload(true);
+                        document.location.reload(true);
                     }, 
                 });
             });
@@ -111,118 +111,117 @@
 
             //Functions for popup   
 
-            	$(this).keyup(function(event) {
-            		if (event.which == 27) { 
-            			disablePopup();  
-            		}
-            	});
-            	
-            	function closeloading() {
-            		$("div.loader").fadeOut('normal');
-            	}
-            	var popupStatus = 0; 
-            	function loadPopup(contentId) {
-            		this.contentId = contentId;
-            		$("#add-group-popup #loader").show();
-            		if(popupStatus == 0) { 
-            			closeloading(); 
-            			$(contentId).fadeIn(0500);             			
-            			popupStatus = 1; 
-            		}
-            		
-            	}
-            	function disablePopup() {
-            		if(popupStatus == 1) { 
-            			$(".updatePopup displayNone popup-window").fadeOut("normal");
-            			popupStatus = 0;  
-            			
-            		}
-            	}  
+            $(this).keyup(function(event) {
+                if (event.which == 27) { 
+                    disablePopup();  
+                }
+            });
             
-           $("[name=createUser]").click(function() { 
-        	   $.ajax({
-        		   url: "User.action?createUser=",
-        		   data: $('#addUserForm').serialize(),
-        		   dataType: "text",
-        		   success: function(error){
-        			   if((error) && (error != "")){
-        				   alert(error);
-        				   }
-        			   else{
-        				   popupStatus = 0;  
-        				   $('#addUser').fadeOut("normal");
-        				   showUserTable(true);
-        				   }                  	
-                   }, 
-               });
+            function closeloading() {
+                $("div.loader").fadeOut('normal');
+            }
+            var popupStatus = 0; 
+            function loadPopup(contentId) {
+                this.contentId = contentId;
+                $("#add-group-popup #loader").show();
+                if(popupStatus == 0) { 
+                    closeloading(); 
+                    $(contentId).fadeIn(0500);             			
+                    popupStatus = 1; 
+                }
+            }
+            
+            function disablePopup() {
+                if(popupStatus == 1) { 
+                    $(".updatePopup displayNone popup-window").fadeOut("normal");
+                    popupStatus = 0;
+                }
+            }
+            
+            $("[name=createUser]").click(function() { 
+                $.ajax({
+                    type: 'POST',
+                    url: "User.action?createUser=",
+                    data: $('#addUserForm').serialize(),
+                    dataType: "text",
+                    success: function(error){
+                        if((error) && (error != "")){
+                            alert(error);
+                        } else {
+                            popupStatus = 0;  
+                            $('#addUser').fadeOut("normal");
+                            showUserTable(true);
+                        }
+                    }, 
+                });
             });
             
             $("[name=addRole]").click(function() { 
-         	   $.ajax({
-         		   url: "Role.action?addRole=",
-         		   data: $('#addRoleForm').serialize(),
-         		   dataType: "text",
-         		   success: function(error){
-         			   if((error) && (error != "")){
-         				   alert(error);
-         				   }
-                 	   else{
-                 		   popupStatus = 0;  
-                 		   $('#addOrganizationRole').fadeOut("normal");
-                 		   showRoleTable(true);
-                 	   }
+                $.ajax({
+                    type: 'POST',
+                    url: "Role.action?addRole=",
+                    data: $('#addRoleForm').serialize(),
+                    dataType: "text",
+                    success: function(error){
+                       if((error) && (error != "")){
+                    	   alert(error);
+                       } else {
+                    	   popupStatus = 0;  
+                    	   $('#addOrganizationRole').fadeOut("normal");
+                    	   showRoleTable(true);
+                       }
                     }, 
                 });
              });
             
             $("[name=createGroupAjax]").click(function() { 
-           	   $.ajax({
-           		   url: "Group.action?createGroupAjax=",  
-           		   data: $('#add-group-ajax').serialize(),
-           		   dataType: "text",
-           		   success: function(error){
-           			   if((error) && (error != "")){
-           				   alert(error);
-           				   }
-           			   else{
-           				   popupStatus = 0;  
-           				   $('#add-group-popup').fadeOut("normal");
-           				   showGroupsTable(true);
-           				   }
-                      }, 
-                  });               
-               });
-            	
+                $.ajax({
+                    type: 'POST',
+                    url: "Group.action?createGroupAjax=",
+                    data: $('#add-group-ajax').serialize(),
+                    dataType: "text",
+                    success: function(error){
+                        if((error) && (error != "")){
+                           alert(error);
+                        } else {
+                            popupStatus = 0;  
+                            $('#add-group-popup').fadeOut("normal");
+                            showGroupsTable(true);
+                        }
+                    }, 
+            	});               
+            });
+            
             // Shows delete user button on mouse enter and hides it on mouse leave
             $("#usertable").on("mouseenter mouseleave", "tr", function(e){
             	if (e.handleObj.origType == "mouseenter") {
-                	$(this).find(".delete-user").show();
+            	    $(this).find(".delete-user").show();
             	} else {
-            		$(this).find(".delete-user").hide();
+            	    $(this).find(".delete-user").hide();
             	}
             });
             
             // Marks selected lines with darker background
             $("#usertable, #roletable").on("change", ".select-user, .select-role", function(){
-            	var $this = $(this);
-            	if ($this.is(":checked")) {
-            		$this.closest("tr").children("td").addClass("selected-row");
-            	} else {
-            		$this.closest("tr").children("td").removeClass("selected-row");
-            	}
+                var $this = $(this);
+                if ($this.is(":checked")) {
+                    $this.closest("tr").children("td").addClass("selected-row");
+                } else {
+                    $this.closest("tr").children("td").removeClass("selected-row");
+                }
             });
             
             $("#usertable").on("click", ".edit-user", function(e){
-            	var $edit_button = $(this);
-               	$(".errortext").remove();
-            	if ($("#loadinguserdata").length == 0) {
-            		$edit_button.after(" <img src='img/ajax-loader-arrow.gif' class='smallicon' id='loadinguserdata'/>");
-            	}
-            	// Get user's dn from clicked row's checkbox
-            	var dn = encodeURI(JSON.stringify($(this.parentNode.parentNode).find(".select-user").data("dn")));
+                var $edit_button = $(this);
+                $(".errortext").remove();
+                if ($("#loadinguserdata").length == 0) {
+                	$edit_button.after(" <img src='img/ajax-loader-arrow.gif' class='smallicon' id='loadinguserdata'/>");
+                }
+                // Get user's dn from clicked row's checkbox
+                var dn = encodeURI(JSON.stringify($(this.parentNode.parentNode).find(".select-user").data("dn")));
                 $.ajax({
-                	url: "User.action?getUser=",
-           			data: {userDn: dn},
+                    url: "User.action?getUser=",
+                    data: {userDn: dn},
                     dataType: "json",
                     success: function(user){
                     	showUpdateUserWindow(user);
@@ -236,21 +235,21 @@
             });
             
             $("#roletable").on("click", ".edit-role", function(e){
-            	var $edit_button = $(this);
-  				$(".errortext").remove();
+                var $edit_button = $(this);
+                $(".errortext").remove();
                 if ($("#loadingroledata").length == 0) {
                     $edit_button.after(" <img src='img/ajax-loader-arrow.gif' class='smallicon' id='loadingroledata'/>");
                 }
                 
-            	var roleDn = encodeURI(JSON.stringify($(this.parentNode).find(".select-role").data("dn")));
+                var roleDn = encodeURI(JSON.stringify($(this.parentNode).find(".select-role").data("dn")));
                 $.ajax({
-                	url: "Role.action?getRoleForUpdating=",
-           			data: {roleDn: roleDn},
-           			dataType: "json",
-           			success: function(role){
-           				showUpdateRoleWindow(role);
-           			}, // success
-           			error: function(error) {
+                    url: "Role.action?getRoleForUpdating=",
+                    data: {roleDn: roleDn},
+                    dataType: "json",
+                    success: function(role){
+                    	showUpdateRoleWindow(role);
+                    }, // success
+                    error: function(error) {
                         $("#loadingroledata, .errortext").remove();
                         $edit_button.after(" <span class='errortext'>"+error.status+" - "+error.statusText+"</span>");
                     }
@@ -258,14 +257,14 @@
             });
             
             $("#usertable").on("click", ".delete-user", function(){
-            	var $this      = $(this);
-            	var dnArr      = [];
-            	
-            	var userInfo = "";
-            	userInfo = "<span class='deletelistitem displayBlock'>"+getPropertyValueFromDn($this.data("dn"), "cn") + " <span class='italic'>["+$this.data("role")+"]</span></span>";
-            	dnArr.push(encodeURI(JSON.stringify($this.data("dn"))));
-            	
-            	$(".confirmtext").html("<fmt:message key='message.deleteusers'/>: <br/>");
+                var $this      = $(this);
+                var dnArr      = [];
+                
+                var userInfo = "";
+                userInfo = "<span class='deletelistitem displayBlock'>"+getPropertyValueFromDn($this.data("dn"), "cn") + " <span class='italic'>["+$this.data("role")+"]</span></span>";
+                dnArr.push(encodeURI(JSON.stringify($this.data("dn"))));
+                
+                $(".confirmtext").html("<fmt:message key='message.deleteusers'/>: <br/>");
                 $(".confirmtext").append(userInfo);
             	
                 $("#dialog").dialog('option', 'buttons', {
@@ -275,9 +274,9 @@
                             data: {entryDns: dnArr},
                             success: function(data) {
                                 // Remove rows from table
-								$this.closest("tr").fadeOut(400, function(){
-								    $(this).remove();
-								});
+                				$this.closest("tr").fadeOut(400, function(){
+                				    $(this).remove();
+                				});
                             }
                         });
                       $(this).dialog("close");
@@ -285,23 +284,23 @@
                     "<fmt:message key='button.cancel'/>": function () {
                       $(this).dialog("close"); 
                     }
-                  });
+                });
                 $("#dialog").dialog("open");
             });
             
             $("#delete-users, #delete-roles").click(function(){
-            	var button     = this;
+                var button     = this;
                 var $this      = "";
-            	var action     = "";
+                var action     = "";
                 var message    = "";
-            	
-            	var entryInfo  = "";
+                
+                var entryInfo  = "";
                 var dnArr      = [];
-				var rowArr     = [];
-				
-				// Set correct actionBean & message
-				action  = (button.id == "delete-users") ? "User.action?deleteUser=" : "Role.action?deleteRole=";
-				message = (button.id == "delete-users") ? "<fmt:message key='message.deleteusers'/>" : "<fmt:message key='message.deleteroles'/>";
+                var rowArr     = [];
+                
+                // Set correct actionBean & message
+                action  = (button.id == "delete-users") ? "User.action?deleteUser=" : "Role.action?deleteRole=";
+                message = (button.id == "delete-users") ? "<fmt:message key='message.deleteusers'/>" : "<fmt:message key='message.deleteroles'/>";
 				
 				$(this).closest(".tab_content").find(".dataTable input:checkbox:checked").map(function(){
 					$this = $(this);
@@ -344,7 +343,7 @@
 
 	    }); // DOM ready
 	    
-	    function getOrgGroupsForSelect(org, targetElement){
+        function getOrgGroupsForSelect(org, targetElement){
             $.getJSON("User.action?findGroups=",{userOrganization: org, ajax: 'true'}, function(groups){
             	var groupsLen = groups.length;
                 if (groupsLen > 0) {
@@ -360,7 +359,7 @@
                     }
                 }
             });
-	    }
+        }
 
 	    function setDatatablesDefaults(callback) {
             $.extend(true, $.fn.dataTable.defaults, {
@@ -416,7 +415,7 @@
 	    <s:messages/>
         <c:if test="${user.getHighestAccessRight() == 200}">
             <s:label for="currentOrganization"><fmt:message key="user.organization"/></s:label>
-            <select id="organizations" name="currentOrganization">
+            <select id="currentOrganization" name="currentOrganization">
                 <option value=""><fmt:message key="general.default"/></option>
                 <c:forEach items="${useraction.findOrganizations()}" var="item">
                     <c:if test="${item == user.organization.name}"><option value="${item}" selected="selected">${item}</option></c:if>
@@ -432,9 +431,6 @@
 					<li class="tab-item active"><a href="#users"><fmt:message key="admin.users"/></a></li>
 					<li class="tab-item"><a href="#organizationroles"><fmt:message key="admin.organizationroles"/></a></li>
 					<li class="tab-item"><a href="#organizationgroups"><fmt:message key="admin.organizationgroups"/></a></li>
-				<!--	<li class="tab-item"><a href="#addgroup"><fmt:message key="admin.addgroup"/></a></li>
-                   <li class="tab-item"><a href="#addorganizationrole"><fmt:message key="admin.addorganizationrole"/></a></li>  
-					<li class="tab-item"><a href="#newuser"><fmt:message key="admin.adduser"/></a></li>--> 
 	                <c:if test="${user.getHighestAccessRight() == 200}">
 	                    <li class="tab-item"><a href="#addorganization"><fmt:message key="admin.addorganization"/></a></li>
 	                    <li class="tab-item"><a href="#workflow"><fmt:message key="admin.workflow"/></a></li>
@@ -443,48 +439,46 @@
 	        </div>
 	        <div id="tabs_content_container" class="admin-tabs_content_container">
 	            <div id="users" class="tab_content">
-	               <h2 class="largeheader">
-		               <c:if test="${user.getHighestAccessRight() != 200}">
-			               <fmt:message key="admin.users.long"><fmt:param value="${user.organization.name}"/></fmt:message>
-		               </c:if>
-		               <c:if test="${user.getHighestAccessRight() == 200}">
-		                   <fmt:message key="admin.users"/>
-		               </c:if>
-	               </h2>
-                   <div class="datatable-tools users">
-				        <input type="checkbox" class="select" title="<fmt:message key="button.select.all"/>">
-						<button id="delete-users" disabled><fmt:message key="button.selected.delete.users"/></button>
-						<button id="addUserBtn"><fmt:message key="admin.adduser"/></button>
-						
-				   </div>
-                   <img id="usertable-loader" src="img/ajax-loader-blue.gif"/>
-	               <table id="usertable" class="admin-datatable">
-	                   <thead>
-	                       <tr>
-	                           <th><fmt:message key="headerkey.user"/></th>
-	                           <th><fmt:message key="user.group"/></th>
-                          <%-- <th><fmt:message key="user.role"/></th> --%>
-	                           <th><fmt:message key="user.fedorarole"/></th>
-	                       </tr>
-	                   </thead>
-	               </table>
-	            </div> <%-- Users tab --%>
+                    <h2 class="largeheader">
+                       <c:if test="${user.getHighestAccessRight() != 200}">
+                           <fmt:message key="admin.users.long"><fmt:param value="${user.organization.name}"/></fmt:message>
+                       </c:if>
+                       <c:if test="${user.getHighestAccessRight() == 200}">
+                           <fmt:message key="admin.users"/>
+                       </c:if>
+                    </h2>
+                    <div class="datatable-tools users">
+                        <input type="checkbox" class="select" title="<fmt:message key="button.select.all"/>">
+                        <button id="delete-users" disabled><fmt:message key="button.selected.delete.users"/></button>
+                        <button id="addUserBtn"><fmt:message key="admin.adduser"/></button>
+                    </div>
+                    <img id="usertable-loader" src="img/ajax-loader-blue.gif"/>
+                    <table id="usertable" class="admin-datatable">
+                       <thead>
+                           <tr>
+                               <th><fmt:message key="headerkey.user"/></th>
+                               <th><fmt:message key="user.group"/></th>
+                               <th><fmt:message key="user.fedorarole"/></th>
+                           </tr>
+                       </thead>
+                    </table>
+                </div> <%-- Users tab --%>
 	            
-	            <div id="organizationroles" class="tab_content">
-	               <h2 class="largeheader">
-	                   <c:if test="${user.getHighestAccessRight() != 200}">
+                <div id="organizationroles" class="tab_content">
+                   <h2 class="largeheader">
+                       <c:if test="${user.getHighestAccessRight() != 200}">
                            <fmt:message key="admin.organizationroles.long"><fmt:param value="${user.organization.name}"/></fmt:message>
                        </c:if>
                        <c:if test="${user.getHighestAccessRight() == 200}">
                            <fmt:message key="admin.organizationroles"/>
                        </c:if>
-	               </h2>
-	               <div class="datatable-tools roles">
+                   </h2>
+                   <div class="datatable-tools roles">
                         <input type="checkbox" class="select" title="<fmt:message key="button.select.all"/>">
                         <button id="delete-roles" disabled><fmt:message key="button.selected.delete.roles"/></button>
                         <button id="addOrganizationRoleBtn" class="topopup" ><fmt:message key="admin.addorganizationrole"/></button>                       
                    </div>
-	               <table id="roletable" class="admin-datatable">
+                   <table id="roletable" class="admin-datatable">
                        <thead>
                            <tr>
                                <th><fmt:message key="role.name"/></th>
@@ -493,21 +487,21 @@
                            </tr>
                        </thead>
                    </table>
-	            </div> <%-- Organizationroles tab --%>
+                </div> <%-- Organizationroles tab --%>
 	            
-	            <div id="organizationgroups" class="tab_content">
+                <div id="organizationgroups" class="tab_content">
                     <h2 class="largeheader"><fmt:message key="admin.organizationgroups"/></h2>
                     <div class="datatable-tools users">
-						<button id="addUserGroupBtn"><fmt:message key="admin.addgroup"/></button>
-				   </div>
+                		<button id="addUserGroupBtn"><fmt:message key="admin.addgroup"/></button>
+                   </div>
                     <table id="grouptable" class="admin-datatable">
-						<thead>
-						    <tr>
-						        <th><fmt:message key="group.name"/></th>
-						    </tr>
+                		<thead>
+                		    <tr>
+                		        <th><fmt:message key="group.name"/></th>
+                		    </tr>
                         </thead>
                     </table>
-	            </div>
+                </div>
 	            
 	            <div id="addUser" class="updatePopup displayNone popup-window">
 	            	<img src="img/icons/silk/cross.png" class="close-popup pointerCursor" title="<fmt:message key="button.close"/>" alt=[x]/>
@@ -618,8 +612,7 @@
 	                     <!--   <img src="img/ajax-loader-arrow.gif" id="loader" class="displayNone"/> --> 
                         </form>
                     </div> 
-
-	            <%-- Add-group tab --%>
+	             <%-- New user tab --%>
 	            
 	            <c:if test="${user.getHighestAccessRight() == 200}">
 	                <div id="addorganization" class="tab_content">
@@ -777,7 +770,7 @@
 					       <p>         
 						       <c:if test="${user.getHighestAccessRight() == 200}">
 								    <s:label for="currentOrganization"><fmt:message key="user.organization"/></s:label>
-						        	<s:select id="organizations" name="currentOrganization">
+						        	<s:select name="currentOrganization">
 						        		<s:option value=""><fmt:message key="general.default"/></s:option>
 						        			<c:forEach items="${useraction.findOrganizations()}" var="item">
 												<s:option value="${item}">${item}</s:option>
