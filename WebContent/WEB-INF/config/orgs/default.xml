@@ -447,7 +447,7 @@
             <mapping schema="capture" name="software"/>
         </element>
         <element name="softwareEnvironment">
-            <mapping schema="capture" name="softEnvironment"/>
+            <mapping schema="capture" name="softwareEnvironment"/>
         </element>
         <element name="softwareSupport">
             <mapping schema="capture" name="softwareSupport"/>
@@ -1514,7 +1514,6 @@
                 </tab>
                 <tab name="original">
                     <field element="original" readonly="false" generated="false" required="false" type="link"/>
-                    <field element="thumb" readonly="false" generated="false" required="false" type="link"/>
                 </tab>
                 <tab name="attachments">
                     <field element="attachment" readonly="false" generated="false" required="false" type="link"/>

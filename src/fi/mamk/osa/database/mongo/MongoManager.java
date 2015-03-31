@@ -604,10 +604,10 @@ public class MongoManager extends DatabaseManager {
 	}
     
     //************************************************************
-  	// METHODS FOR METADATA FILES
-  	//************************************************************
+    // METHODS FOR METADATA FILES
+    //************************************************************
     
-    public void addMetadataFile(User user, String filename, LinkedHashMap<String, MetaDataElement> map) {
+    public void addMetadataFile(User user, String filename, LinkedHashMap<String, MetaDataElement> map, boolean massEdit) {
         String username = user.getOrganization().getName()+":"+user.getMail();
     	this.selectCollection(DB_METADATA);
     	
@@ -616,39 +616,54 @@ public class MongoManager extends DatabaseManager {
     	BasicDBObject query = new BasicDBObject();
     	
     	DBCursor cursor = table.find(updateQuery, new BasicDBObject(ARRAY_METADATA,1).append("_id",false));
-
+    
     	Vector<Object> metadatafiles = new Vector<Object>();
     	
     	MetaDataElement mdElem = new MetaDataElement();
     	mdElem.setName("filename");
     	mdElem.setValue(filename);
     	map.put("filename", mdElem);
-
-    	Object serializedMap = JSON.parse(new flexjson.JSONSerializer().deepSerialize(map));
-
+    
+    	Object serializedMap = null;
+    
     	// User already has at least one file added to metadata list
     	if (cursor.size() != 0) {
-    		// Given file is not yet on the list, update db with the file
-    		if (!cursor.next().get(ARRAY_METADATA).toString().contains(filename)) {
-    			updateCommand.put("$push", new BasicDBObject(ARRAY_METADATA, serializedMap));
-    			this.table.update(updateQuery, updateCommand);
-    		} 
-    		// Given file is already on the list, update it's metadatas
-    		else {
-				updateCommand = new BasicDBObject();
-				// Appends filename to filter so query is "get from this user where filename is this"
-				updateQuery.append(ARRAY_METADATA+".filename.value", filename);
-				updateCommand.put("$set", new BasicDBObject(ARRAY_METADATA+".$", serializedMap));
-				
-				this.table.update(updateQuery, updateCommand, true, false);
-    		}
+    	    // Given file is not yet on the list, update db with the file
+    	    if (!cursor.next().get(ARRAY_METADATA).toString().contains(filename)) {
+                serializedMap = JSON.parse(new flexjson.JSONSerializer().deepSerialize(map));
+                updateCommand.put("$push", new BasicDBObject(ARRAY_METADATA, serializedMap));
+                this.table.update(updateQuery, updateCommand);
+    	    } 
+    	    // Given file is already on the list, update it's metadatas
+    	    else {
+    	        
+                LinkedHashMap<String, MetaDataElement> oldMap = getMetadataFile(user, filename);
+                // file has already data in mongo
+                if (oldMap.size() > 0 && massEdit) {
+                    // keep not modified metadata in database
+                    for (Entry<String, MetaDataElement> entry : oldMap.entrySet()) {
+                        if (!map.containsKey(entry.getKey())) {
+                            map.put(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+    			
+                serializedMap = JSON.parse(new flexjson.JSONSerializer().deepSerialize(map));
+                updateCommand = new BasicDBObject();
+                // Appends filename to filter so query is "get from this user where filename is this"
+                updateQuery.append(ARRAY_METADATA+".filename.value", filename);
+                updateCommand.put("$set", new BasicDBObject(ARRAY_METADATA+".$", serializedMap));
+                  
+                this.table.update(updateQuery, updateCommand, true, false);
+            }
     	} 
     	// User does not have any files added to metadata list
     	else {
-    		metadatafiles.add(serializedMap);
-    		query.put("username", username);
-    		query.put(ARRAY_METADATA, metadatafiles);
-    		this.table.insert(query);
+            serializedMap = JSON.parse(new flexjson.JSONSerializer().deepSerialize(map));
+            metadatafiles.add(serializedMap);
+            query.put("username", username);
+            query.put(ARRAY_METADATA, metadatafiles);
+            this.table.insert(query);
     	}
     	
     	cursor.close();

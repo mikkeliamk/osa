@@ -12,6 +12,7 @@
                 <s:hidden name="${fieldname}[${mdElement}].value" class="required-${formElement.required}"/>
 			</c:if>
             <s:hidden name="${fieldname}[${mdElement}].name" value="${mdElement}"/>
+            <s:hidden name="${fieldname}[${mdElement}].generated" value="${formElement.generated}" />
         </div>
 <%--     </s:layout-component> --%>
 </s:layout-definition>

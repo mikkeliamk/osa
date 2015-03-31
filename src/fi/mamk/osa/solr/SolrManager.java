@@ -83,7 +83,7 @@ public class SolrManager extends SearchManager
     	                                    new Vector<String>(), 
     	                                    -1, 
     	                                    Integer.MAX_VALUE, 
-    	                                    "");
+    	                                    SOLRFIELD_Id+" asc");
     	
     	if (response != null) {
 

@@ -1353,19 +1353,20 @@ public class IngestAction extends OsaBaseActionBean {
     @HandlesEvent("addMetaDataFiles")
     public Resolution addMetaDataFiles() {
         
-        LinkedHashMap<String, MetaDataElement> map = new LinkedHashMap<String, MetaDataElement>();
         allCaptureElements = fedoraBeans.get(0).getDataStream(FedoraBean.DATASTREAM_CAPTURE).getMetaDataElements();
         watchedFiles = (Vector<String>) this.getContext().getRequest().getSession().getAttribute("watchedFiles");
-
+        boolean massEdit = watchedFiles.size() > 1 ? true:false;
+        
         for (int i = 0; i < watchedFiles.size(); i++) {
+            LinkedHashMap<String, MetaDataElement> map = new LinkedHashMap<String, MetaDataElement>();
             for (Entry<String, MetaDataElement> entry : allCaptureElements.entrySet()) {
                 // Do not store empty fields
-                if (entry.getValue().getValue() != null) {
+                if (!entry.getValue().isEmpty()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
             }
-
-            Osa.dbManager.get("mongo").addMetadataFile(this.getContext().getUser(), watchedFiles.get(i), map);
+            
+            Osa.dbManager.get("mongo").addMetadataFile(this.getContext().getUser(), watchedFiles.get(i), map, massEdit);
         }
 
         this.getContext().getRequest().getSession().removeAttribute("watchedFiles");
@@ -1377,11 +1378,14 @@ public class IngestAction extends OsaBaseActionBean {
         inconsistantFields = new Vector<String>();
         LinkedHashMap<String, MetaDataElement> oneFile = new LinkedHashMap<String, MetaDataElement>();
         LinkedHashMap<String, MetaDataElement> combinedMetadata = new LinkedHashMap<String, MetaDataElement>();
+        
         FedoraBean fbean = new FedoraBean();
         this.fedoraBeans.add(fbean);
+        
         HttpSession session = this.getContext().getRequest().getSession();
         session.setAttribute("watchedFiles", watchedFiles);
-
+        int filesHandled = 0;
+        
         for (String filename : watchedFiles) {
             oneFile = Osa.dbManager.get("mongo").getMetadataFile(this.getContext().getUser(), filename);
             for (Entry<String, MetaDataElement> entry : oneFile.entrySet()) {
@@ -1390,20 +1394,38 @@ public class IngestAction extends OsaBaseActionBean {
                     // If combined metadata does not have same value as current
                     // field, insert empty value.
                     if (!combinedMetadata.get(entry.getKey()).getValue().equals(entry.getValue().getValue())) {
-                        combinedMetadata.put(entry.getKey(), new MetaDataElement(entry.getKey(),
-                                entry.getKey(),
-                                "",
-                                entry.getValue().getMetaDataType()));
+                        combinedMetadata.put(entry.getKey(), 
+                                             new MetaDataElement(entry.getKey(),
+                                                                 entry.getKey(),
+                                                                 "",
+                                                                 entry.getValue().getMetaDataType()));
                         // Add field name to vector for later use
                         inconsistantFields.add(entry.getKey());
                     }
                 } else {
-                    combinedMetadata.put(entry.getKey(), entry.getValue());
+                    // If the first file has not a value and the later files have
+                    if (filesHandled>0 && !entry.getValue().getValue().isEmpty()) {
+                        combinedMetadata.put(entry.getKey(), 
+                                new MetaDataElement(entry.getKey(),
+                                                    entry.getKey(),
+                                                    "",
+                                                    entry.getValue().getMetaDataType()));
+                        
+                        // Add field name to vector for later use
+                        inconsistantFields.add(entry.getKey());
+                        
+                    } else {
+                        combinedMetadata.put(entry.getKey(), entry.getValue());
+                    }
                 }
             }
-
+            filesHandled++;
         }
-        
+        // If one file selected and its saved type value does not match selected
+        // form, inform user
+//        if (watchedFiles.size() == 1 && !oneFile.isEmpty()) {
+//            if (!oneFile.get("type").getValue().equalsIgnoreCase(index)) inconsistantFields.add(oneFile.get("type").getName());
+//        }
         this.fedoraBeans.get(0).getDataStream(FedoraBean.DATASTREAM_CAPTURE).setMetaDataElements(combinedMetadata);
         return new ForwardResolution(TARGET + index).addParameter("metadata", 1);
     }

@@ -9,12 +9,12 @@
 <c:set var="pid" value="${ingestaction.pid}" />
 <c:set var="accessKey" value="${ingestaction.onkiAccessKey}" />
 <c:if test="${param.index != 'mass'}">
-	<c:set var="tabs" value="${gui.getGUITabs(index)}" />
-	<c:set var="names" value="${gui.getGUIElements(index)}" />
+    <c:set var="tabs" value="${gui.getGUITabs(index)}" />
+    <c:set var="names" value="${gui.getGUIElements(index)}" />
 </c:if>
 <c:if test="${param.index eq 'mass'}">
-	<c:set var="tabs" value="${actionBean.customTabs}" />
-	<c:set var="names" value="${actionBean.customForm}" />
+    <c:set var="tabs" value="${actionBean.customTabs}" />
+    <c:set var="names" value="${actionBean.customForm}" />
 </c:if>
 
 <c:set var="previousUrl" value="${actionBean.isFromSearch()}" />
@@ -264,18 +264,19 @@
            	});
 		}
 		
-		/** Marks fields with inconsistant values after opening multiple objects on the form.
-		*
-		*/
-		function getWorkflowValues() {
-			var fieldName = "allFedoraBeans[0].captureData.metaDataElements";
-			<c:forEach var="field" items="${actionBean.inconsistantFields}">
-			   var field = "${field}";
-			   $("[name='"+fieldName+"["+field+"].value']").css({"border": "solid 1px #EDB600", "box-shadow": "0px 0px 5px #EDB600"});
-			   $("[name='"+fieldName+"["+field+"].value']").prop("title", "<fmt:message key='error.inconsistant.metadata'/>");
-			</c:forEach>
-		}
-		
+        /** Marks fields with inconsistant values after opening multiple objects on the form.
+        *
+        */
+        function getWorkflowValues() {
+            var fieldName = "allFedoraBeans[0].captureData.metaDataElements";
+            <c:forEach var="field" items="${actionBean.inconsistantFields}">
+                var field = "${field}";
+                var $field = $("[name='"+fieldName+"["+field+"].value']");
+                $field.css({"border": "solid 1px #EDB600", "box-shadow": "0px 0px 5px #EDB600"})
+                      .prop({"title": "<fmt:message key='error.inconsistant.metadata'/>", "disabled":true, "autocomplete":"off"});
+            </c:forEach>
+        }
+	
 		function getInheritance(ispartOf){
 			var model = contentType;
 			$('.manualinherit').remove();

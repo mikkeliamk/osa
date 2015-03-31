@@ -99,6 +99,7 @@ function deleteRow(filesToRemove, rows, queue){
 	if (typeof queue === "undefined") {queue = false;}
 	var rowLen = rows.length;
 	$.ajax({
+                type: 'POST',
 		url: "Ingest.action?removeFromWatchedFolder=",
 		data: { watchedFiles: filesToRemove, fromQueue: queue},
 		global: false,
@@ -239,11 +240,11 @@ $(function(){
 	
 	getContentModels("all", function(cmodels){
 		var html = "";
-		for (category in cmodels) {
+		for (var category in cmodels) {
 			html += "<div class='"+category+" add-button-container'>";
 			html += "<h3 class='largeheader'>"+messagebundle[category]+"</h3>";
 			var items = cmodels[category];
-			for (item in items) {
+			for (var item in items) {
 				// Disable action button
 				if (items[item] == "action") {
 					html += '<div class="add-button-div disabled"><span>'+messagebundle[items[item]]+'</span></div>';
@@ -444,9 +445,9 @@ $(function(){
 						getContentModels("documents", function(cmodels){
 							var option = "";
 							option += "<option value=''>"+messagebundle.button.select+"</option>";
-							for (category in cmodels) {
+							for (var category in cmodels) {
 								var items = cmodels[category];
-								for (item in items) {
+								for (var item in items) {
 									option += "<option value='"+items[item]+"'>"+messagebundle[items[item]]+"</option>";
 								}
 							}

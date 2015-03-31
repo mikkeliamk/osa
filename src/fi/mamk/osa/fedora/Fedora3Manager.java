@@ -1105,15 +1105,21 @@ public class Fedora3Manager extends RepositoryManager {
         
         // get abbreviation for mime from HashMap
         for (Entry<String, String> entry : DATATYPES_MAP.entrySet()) {
-            //if (entry.getValue().equals(mime)) {
-            if (mime.endsWith(entry.getValue())) {
+            if (entry.getValue().equals(mime)) {
                 PID = PID + entry.getKey();
                 bFound = true;
+                break;
             }
+        }
+
+        // if not found, check if collection
+        if (!bFound && mime.endsWith(RepositoryManager.COLLECTION)) {
+            PID = PID + RepositoryManager.DATATYPES_MAP_REVERSE.get(RepositoryManager.COLLECTION);
+            bFound = true;
         }
         
         // if not found, use default value
-        if (! bFound) {
+        if (!bFound) {
             for (Entry<String, String> entry : DATATYPES_MAP.entrySet()) {
                 if (entry.getValue().equals(RepositoryManager.DEFAULT_TYPE)) {
                     PID = PID + entry.getKey();

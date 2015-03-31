@@ -184,7 +184,7 @@ public abstract class DatabaseManager {
 	 * @param filename	Filename
 	 * @param map		Metadata fields & values from form
 	 */
-	public void addMetadataFile(User user, String filename, LinkedHashMap<String, MetaDataElement> map){
+	public void addMetadataFile(User user, String filename, LinkedHashMap<String, MetaDataElement> map, boolean massEdit){
 		
 	}
 	

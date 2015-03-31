@@ -175,6 +175,37 @@ public class MetaDataElement implements Serializable {
 
         return isEqual;
     }
+
+    /**
+     * Check if metadata element has value
+     * @return
+     */
+    public boolean isEmpty() {
+        boolean retValue = true;
+        if (this.getValue() != null) {
+            retValue = false;
+        } else if (this.getValues().size() > 0 && this.getValues().get(0) != null) {
+            retValue = false;
+        } else if (this.getNestedElements().size() > 0) {
+            Vector<LinkedHashMap<String, MetaDataElement>> nestedElements = this.getNestedElements();
+            for (LinkedHashMap<String, MetaDataElement> lhm : nestedElements) {
+                if (lhm != null) {
+                    Iterator<Entry<String, MetaDataElement>> iterLhm = lhm.entrySet().iterator();
+                    while (iterLhm.hasNext()) {
+                        Map.Entry<String, MetaDataElement> entryLhm = (Map.Entry<String, MetaDataElement>) iterLhm.next();
+                        MetaDataElement nestedElement = entryLhm.getValue();
+                        if (nestedElement.getValue() != null) {
+                            retValue = false;
+                        } else if (nestedElement.getValues().size() > 0 && nestedElement.getValues().get(0) != null) {
+                            retValue = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        return retValue;
+    }
     
     @Override
     public String toString() {

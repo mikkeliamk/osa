@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 public class OsaLocalePicker extends DefaultLocalePicker {
     
     private static final Logger logger = Logger.getLogger(OsaLocalePicker.class);
-    public static final String LOCALE = "org.apache.struts.action.LOCALE";
     
     /**
      * Default constructor.
@@ -25,10 +24,6 @@ public class OsaLocalePicker extends DefaultLocalePicker {
     public Locale pickLocale(HttpServletRequest request) {
         Locale locale = null;
         locale = (Locale) request.getSession().getAttribute("userLocale");
-        
-        if (locale==null) {
-            locale = (Locale) request.getSession().getAttribute(LOCALE);
-        }
 
         if (locale!=null) {
             return locale;
