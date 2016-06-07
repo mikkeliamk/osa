@@ -13,11 +13,9 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.imgscalr.Scalr;
-import org.jpedal.PdfDecoder;
-import org.jpedal.exception.PdfException;
-import org.jpedal.fonts.FontMappings;
-
 import com.sun.media.jai.codec.FileSeekableStream;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
@@ -37,8 +35,8 @@ public class ThumbBean extends DataStream {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(ThumbBean.class);
     
-    public static final String THUMB_DSID 		= "thumb";
-    public static final String THUMB_EXTENSION 	= "png";
+    public static final String THUMB_DSID       = "thumb";
+    public static final String THUMB_EXTENSION  = "png";
     
     // container for thumb-objects property data
     LinkedHashMap<String, DataStream> lhmElementProperties = new LinkedHashMap<String, DataStream>();
@@ -64,47 +62,45 @@ public class ThumbBean extends DataStream {
     
     /**
      * createPreview for documents
-     * @param pdfPathAndFileName    absolute path 
-     * @param pid                   A persistent, unique identifier for the object
-     * @throws IOException
-     * @throws PdfException
+     * @param filePath    absolute path 
+     * @param pid         A persistent, unique identifier for the object
+     * @param format      file format
      */
     public static File createThumbFile(String filePath, String pid, String format) {
-        String fileExtension 				= filePath.substring(filePath.lastIndexOf('.'), filePath.length());
-        PdfDecoder pdfDecoder 				= null;
-        File thumbFile 						= null;
-        BufferedImage bufferedImage 		= null;
-        BufferedImage thumb 				= null;
+        String fileExtension                = filePath.substring(filePath.lastIndexOf('.'), filePath.length());
+        File thumbFile                      = null;
+        BufferedImage bufferedImage         = null;
+        BufferedImage thumb                 = null;
         // use the same path, but change the extension to png
-        String thumbnailPathAndName 		= FilenameUtils.removeExtension(filePath)+"."+THUMB_EXTENSION;
-        FileOutputStream fileOutputStream 	= null;
-            
+        String thumbnailPathAndName         = FilenameUtils.removeExtension(filePath)+"."+THUMB_EXTENSION;
+        FileOutputStream fileOutputStream   = null;
+           
         if (fileExtension.equalsIgnoreCase(".pdf")) {
-        	pdfDecoder = new PdfDecoder(true);
             try {
-                // set mappings for non-embedded fonts to use
-                FontMappings.setFontReplacements();
-        
                 // open the PDF file
-                pdfDecoder.openPdfFile(filePath);
-                /**get page 1 as an image*/
-                bufferedImage = pdfDecoder.getPageAsImage(1);
+                PDDocument document = PDDocument.load(filePath);
+                                                
+                PDPage firstPage = (PDPage) document.getDocumentCatalog().getAllPages().get(0);
+                // get page 1 as an image
+                bufferedImage = firstPage.convertToImage();
                 thumb = Scalr.resize(bufferedImage, 250);
-
+                
+                //File outputfile = new File(thumbnailPathAndName);
                 fileOutputStream = new FileOutputStream(thumbnailPathAndName);
                 ImageIO.write(thumb, THUMB_EXTENSION, fileOutputStream);
-                // close the pdf file
-                pdfDecoder.closePdfFile();
                 
-            } catch (IOException | PdfException e) {
+                // close the pdf file
+                document.close();
+                
+            } catch (IOException e) {
                 logger.error("Error creating thumbnail for pdf file: "+e.getMessage());
             }
             
         } else if (format.equalsIgnoreCase("image")) {
             
             try {
-            	// Decide if or not try to make an animated gif thumb for animated gif files
-            	// At the moment it does not and current solution (Scalr) does not support making animated gifs
+                // Decide if or not try to make an animated gif thumb for animated gif files
+                // At the moment it does not and current solution (Scalr) does not support making animated gifs
                 
                 if (fileExtension.equalsIgnoreCase(".tif")) {
                     SeekableStream s = new FileSeekableStream(filePath);
@@ -132,14 +128,13 @@ public class ThumbBean extends DataStream {
                     ImageIO.write(thumb, THUMB_EXTENSION, fileOutputStream);
                     
                 } else {
-                    
                     bufferedImage = ImageIO.read(new File(filePath));
                     thumb = Scalr.resize(bufferedImage, 200); // Scale the original image around the width and height of 150 px, maintaining original aspect ratio
                     fileOutputStream = new FileOutputStream(thumbnailPathAndName);
                     ImageIO.write(thumb, THUMB_EXTENSION, fileOutputStream);
                     
                 }
-                                
+                
             } catch (IOException e) {
                 logger.error("Error creating thumbnail for image file: "+e.getMessage());
             } 
@@ -161,39 +156,44 @@ public class ThumbBean extends DataStream {
     
     public static void createThumbFileAfterUpload(String mimeType, String filename, String dir, OsaActionBeanContext context) {
         
-    	// Images and pdf
-        if (mimeType != null && mimeType.contains("image") || FilenameUtils.getExtension(filename).equalsIgnoreCase("pdf")) {
-        	String copyFilename = "";
-	        try {
-	        	// Make a copy of uploaded file which the thumbnail image will be generated from
-	        	copyFilename = THUMB_DSID+"_"+filename;
-	        	FileUtils.copyFile(new File(dir + filename), new File(dir + copyFilename));
+        // Images and pdf
+        if (mimeType != null && 
+                mimeType.contains("image") 
+                || FilenameUtils.getExtension(filename).equalsIgnoreCase("pdf")
+                || FilenameUtils.getExtension(filename).equalsIgnoreCase("jpf")
+                || FilenameUtils.getExtension(filename).equalsIgnoreCase("jp2")
+                ) {
+            String copyFilename = "";
+            try {
+                // Make a copy of uploaded file which the thumbnail image will be generated from
+                copyFilename = THUMB_DSID+"_"+filename;
+                FileUtils.copyFile(new File(dir + filename), new File(dir + copyFilename));
 
-	        } catch (IOException e) {
-				e.printStackTrace();
-			}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-	        File thumbFile = createThumbFile(dir + copyFilename, null, "image");
-	        // If the copied file's name does not equal the generated thumbnail's name, delete the copy.
-	        // This is to delete the extra image copy if the copy does not have same extension as the thumbnail (not .png).
-	        if (!thumbFile.getName().equals(copyFilename)) {
-	            new File(dir + THUMB_DSID+"_"+filename).delete();
-	        }
+            File thumbFile = createThumbFile(dir + copyFilename, null, "image");
+            // If the copied file's name does not equal the generated thumbnail's name, delete the copy.
+            // This is to delete the extra image copy if the copy does not have same extension as the thumbnail (not .png).
+            if (!thumbFile.getName().equals(copyFilename)) {
+                new File(dir + THUMB_DSID+"_"+filename).delete();
+            }
         // Rest of the formats. Uses generic "no preview" image for thumbnail 
         } else {
-        	String copyFilename = filename;
-        	String copyFileExt 	= FilenameUtils.getExtension(filename);
-        	try {
-	        	if (copyFileExt != null && !copyFileExt.isEmpty()) {
-	        		copyFilename = copyFilename.replace(copyFileExt, THUMB_EXTENSION);
-	        	} else {
-	        		copyFilename = copyFilename+"."+THUMB_EXTENSION;
-	        	}
-	        	FileUtils.copyFile(new File(context.getServletContext().getRealPath("/img/nopreview.png")), 
-	        			           new File(dir + THUMB_DSID+"_"+copyFilename));
-        	} catch (IOException e) {
-				e.printStackTrace();
-        	}
+            String copyFilename = filename;
+            String copyFileExt  = FilenameUtils.getExtension(filename);
+            try {
+                if (copyFileExt != null && !copyFileExt.isEmpty()) {
+                    copyFilename = copyFilename.replace(copyFileExt, THUMB_EXTENSION);
+                } else {
+                    copyFilename = copyFilename+"."+THUMB_EXTENSION;
+                }
+                FileUtils.copyFile(new File(context.getServletContext().getRealPath("/img/nopreview.png")), 
+                                   new File(dir + THUMB_DSID+"_"+copyFilename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     

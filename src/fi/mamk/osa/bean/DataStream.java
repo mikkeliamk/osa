@@ -2,8 +2,16 @@ package fi.mamk.osa.bean;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
+import java.util.Map.Entry;
+
 import org.apache.log4j.Logger;
 import fi.mamk.osa.bean.MetaDataElement.MetaDataType;
 
@@ -225,12 +233,12 @@ public abstract class DataStream implements Serializable {
     
     public void setMetaDataElement(String name, String visibleName, String value, MetaDataType eType) {
         if (lhmElements.containsKey(name)) {
-        	MetaDataElement element = lhmElements.get(name);
-        	element.getValues().add(value);
-        	lhmElements.put(name, element);
+            MetaDataElement element = lhmElements.get(name);
+            element.getValues().add(value);
+            lhmElements.put(name, element);
         } else {
-        	MetaDataElement mdElement = new MetaDataElement(name, visibleName, value, eType);
-        	lhmElements.put(name, mdElement);
+            MetaDataElement mdElement = new MetaDataElement(name, visibleName, value, eType);
+            lhmElements.put(name, mdElement);
         }
     }
     
@@ -339,6 +347,43 @@ public abstract class DataStream implements Serializable {
 
     }
     
+    /**
+     * Function is used for comparing datastream content
+     * @return
+     */
+    public String getMetadataContentUsingVisibleName(String ignoreElement) {
+        
+        String content = "";
+        LinkedHashMap<String, String> elements = new LinkedHashMap<String, String>();
+        
+        if (ignoreElement != null) {
+            // f.ex. remove name=identifier before comparing DC datastreams
+            lhmElements.remove(ignoreElement);
+        }
+        
+        // go through metadata elements, and create new collection where only visible names are used with values
+        Iterator<Entry<String, MetaDataElement>> iter = this.lhmElements.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, MetaDataElement> entry = (Map.Entry<String, MetaDataElement>) iter.next();
+            MetaDataElement mdElement = entry.getValue();
+            
+            if (!mdElement.isEmpty()) {
+                content = "{visiblename="+mdElement.getVisibleName()+
+                          ", value="+mdElement.getValue()+
+                          ", values="+mdElement.getValues().toString()+
+                          ", type="+mdElement.getMetaDataType().toString()+
+                          ", nestedElements="+mdElement.getNestedElements().toString()+"}";
+                elements.put(mdElement.getVisibleName(), content);
+            }
+        }
+        
+        // sort by key
+        Map<String, String> sorted = sortByKeys(elements);
+        
+        return sorted.toString();
+        
+    }
+    
     public String getChecksum() { return this.checksum; }
     public void setChecksum(String value) { this.checksum = value; }
     
@@ -385,4 +430,17 @@ public abstract class DataStream implements Serializable {
         this.getMetaDataElements().remove(name);
     }
     
+    // Function to sort a map by key
+    public <K extends Comparable,V extends Comparable> Map<K,V> sortByKeys(Map<K,V> map) {
+        List<K> keys = new LinkedList<K>(map.keySet());
+        Collections.sort(keys);
+     
+        Map<K,V> sortedMap = new LinkedHashMap<K,V>();
+        for(K key: keys){
+            sortedMap.put(key, map.get(key));
+        }
+     
+        return sortedMap;
+    }
+
 }

@@ -2,15 +2,22 @@ package fi.mamk.osa.bean;
 
 import fi.mamk.osa.bean.DCBean;
 import fi.mamk.osa.bean.MetaDataElement;
+import fi.mamk.osa.core.Osa;
 import fi.mamk.osa.fedora.RepositoryManager;
 import fi.mamk.osa.ui.FormElement;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,13 +41,22 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
+import org.apache.tika.Tika;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -53,14 +69,15 @@ import org.xml.sax.XMLReader;
 public class FedoraBean {
     
     private static final Logger logger = Logger.getLogger(FedoraBean.class);
-    public static final String DATASTREAM_DC          = "DC";
-    public static final String DATASTREAM_CAPTURE     = "CAPTURE";
+    public static final String DATASTREAM_DC = "DC";
+    public static final String DATASTREAM_CAPTURE = "CAPTURE";
+    public static final String DATASTREAM_CONTENT = "CONTENT";
     public static final String DATASTREAM_AUDIT_TRAIL = "AUDIT_TRAIL";
-    public static final String DATASTREAM_RELS_EXT    = "RELS-EXT";
-    public static final String DATASTREAM_RELS_INT    = "RELS-INT";
-    public static final String DATASTREAM_THUMB       = "THUMB";
-    public static final String DATASTREAM_ATTACHMENT  = "ATTACHMENT";
-    public static final String DATASTREAM_MANAGEMENT  = "MANAGEMENT";
+    public static final String DATASTREAM_RELS_EXT = "RELS-EXT";
+    public static final String DATASTREAM_RELS_INT = "RELS-INT";
+    public static final String DATASTREAM_THUMB = "THUMB";
+    public static final String DATASTREAM_ATTACHMENT = "ATTACHMENT";
+    public static final String DATASTREAM_MANAGEMENT = "MANAGEMENT";
     
     public static final String DATASTREAM_ORIGINAL = "ORIGINAL";
     public static final String DATASTREAM_ORIGINAL_LABEL = "-O";
@@ -80,6 +97,7 @@ public class FedoraBean {
     DCBean dublinCoreData = null;
     CaptureBean captureData = null;
     OriginalBean original = null;
+    ContentBean content = null;
     RelationsBean relations = null;
     ThumbBean thumb = null;
     AttachmentBean attachment = null;
@@ -111,6 +129,7 @@ public class FedoraBean {
         dublinCoreData = new DCBean(PID);
         captureData = new CaptureBean(PID);
         original = new OriginalBean(PID);
+        content = new ContentBean(PID);
         relations = new RelationsBean(PID);
         thumb = new ThumbBean(PID);
         attachment = new AttachmentBean(PID);
@@ -130,6 +149,7 @@ public class FedoraBean {
         dublinCoreData = new DCBean(PID);
         captureData = new CaptureBean(PID);
         original = new OriginalBean(PID);
+        content = new ContentBean(PID);
         relations = new RelationsBean(PID);
         thumb = new ThumbBean(PID);
         attachment = new AttachmentBean(PID);
@@ -149,6 +169,7 @@ public class FedoraBean {
         dublinCoreData = new DCBean(PID);
         captureData = new CaptureBean(PID);
         original = new OriginalBean(PID);
+        content = new ContentBean(PID);
         relations = new RelationsBean(PID);
         thumb = new ThumbBean(PID);
         attachment = new AttachmentBean(PID);
@@ -202,6 +223,9 @@ public class FedoraBean {
             
         } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_MANAGEMENT)) {
             return this.management;
+            
+        } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_CONTENT)) {
+            return this.content;
             
         }
         
@@ -321,6 +345,12 @@ public class FedoraBean {
             elements = this.getDataStream(DATASTREAM_MANAGEMENT).getMetaDataElements();
             rootElementName = dataStreamID.toLowerCase();
             ELEMENT_NS = "m:";
+            
+        } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_CONTENT)) {
+            
+            elements = this.getDataStream(DATASTREAM_CONTENT).getMetaDataElements();
+            rootElementName = dataStreamID.toLowerCase();
+            ELEMENT_NS = "ft:";
         }
         
         try {
@@ -342,6 +372,7 @@ public class FedoraBean {
                 
             } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_CAPTURE)
                        || dataStreamID.equalsIgnoreCase(DATASTREAM_MANAGEMENT)
+                       || dataStreamID.equalsIgnoreCase(DATASTREAM_CONTENT)
                        ) 
             {
                 // root element
@@ -357,6 +388,8 @@ public class FedoraBean {
                     doc.getDocumentElement().setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:c", OSA_NS);
                 } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_MANAGEMENT)) {
                     doc.getDocumentElement().setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:m", OSA_NS);
+                } else if (dataStreamID.equalsIgnoreCase(DATASTREAM_CONTENT)) {
+                    doc.getDocumentElement().setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ft", OSA_NS);
                 }
             }
             
@@ -565,6 +598,170 @@ public class FedoraBean {
         
         // update datastream 
         this.captureData.setMetaDataElements(orderedElements);
+    }
+    
+    /**
+     * Extract metadata using Tika
+     * @throws Exception
+     */
+    public static HashMap<String, Object> extractMetadata(File file, String contentType) {
+
+        HashMap<String, Object> captureMetadata = new HashMap<String, Object>();
+        String PATTERN_DATE_MODEL = "([0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)|([0-9]{4}\\-[0-9]{2}\\-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2})";
+        boolean addType = false;
+        
+        if (contentType == null) {
+            String fileExtension = FilenameUtils.getExtension(file.getPath());
+            addType = true;
+            
+            if (fileExtension.equalsIgnoreCase("tif") 
+                || fileExtension.equalsIgnoreCase("gif") 
+                || fileExtension.equalsIgnoreCase("jpg") 
+                || fileExtension.equalsIgnoreCase("jpf")
+                || fileExtension.equalsIgnoreCase("jp2")
+                || fileExtension.equalsIgnoreCase("jpeg") 
+                || fileExtension.equalsIgnoreCase("png")) {
+                contentType = RepositoryManager.IMAGE;
+                
+            } else if (fileExtension.equalsIgnoreCase("wav")
+                       || fileExtension.equalsIgnoreCase("wma")) {
+                contentType = RepositoryManager.AUDIO;
+                
+            } else if (fileExtension.equalsIgnoreCase("wmv")
+                       || fileExtension.equalsIgnoreCase("m4v")
+                       || fileExtension.equalsIgnoreCase("mp4")) {
+                contentType = RepositoryManager.MOVINGIMAGE;
+                
+            } else {
+                contentType = RepositoryManager.DOCUMENT;
+            }
+        }
+        
+        try {
+            InputStream input = new FileInputStream(file);
+            ContentHandler textHandler = new BodyContentHandler();
+            Metadata metadata = new Metadata();
+            Parser parser = new AutoDetectParser();
+            ParseContext context = new ParseContext();
+            
+            parser.parse(input, textHandler, metadata, context);
+            input.close();
+            
+            HashMap<String, String> mappings = getMappings(contentType);
+            
+            // metadata found by Tika
+            for (String key : metadata.names()) {
+                String value = metadata.get(key);
+                // check if found to be mapped with capture's metadata
+                if (mappings.containsKey(key)) {
+                    // check date format
+                    if (value.matches(PATTERN_DATE_MODEL)) {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Object o = simpleDateFormat.parse(value);
+                        value = simpleDateFormat.format((Date)o);
+                    }
+                    
+                    captureMetadata.put(mappings.get(key), value);
+                }
+            }
+            
+            // add file information
+            if (file.isFile()) {
+                // add file size
+                double fileSize = (double) (file.length()/1024.0);
+                String unit = " kB";
+                
+                if (fileSize > 1000) {
+                    fileSize = fileSize/1024.0;
+                    unit = " MB";
+                }
+                
+                String strFileSize = String.format("%.1f", fileSize).concat(unit);               
+                captureMetadata.put("extentsize", strFileSize);
+                
+                // add file name
+                captureMetadata.put("fileName", file.getName());
+                
+            }            
+            
+            if (addType) {
+                captureMetadata.put(CaptureBean.TYPE, contentType);
+            }
+            
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        
+        return captureMetadata;
+    }
+    
+    /**
+     * Extract content using Tika
+     * @throws Exception
+     */
+    public static String extractContent(File file) {
+        String content = null;
+        if (file == null) {
+            return content;
+        }
+        
+        try {
+            InputStream input = new FileInputStream(file);
+            ContentHandler textHandler = new BodyContentHandler();
+            Metadata metadata = new Metadata();
+            Parser parser = new AutoDetectParser();
+            ParseContext context = new ParseContext();
+            
+            parser.parse(input, textHandler, metadata, context);
+            input.close();
+            
+            content = textHandler.toString();
+            // remove spaces
+            content = content.replaceAll("^\\s*", " ");
+            
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        
+        return content;
+    }
+    
+    /**
+     * Get tika/capture parameter mappings
+     * @param contenttype
+     * @return
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
+    public static HashMap<String, String> getMappings(String contentType) throws SAXException, IOException, ParserConfigurationException {
+        
+        HashMap<String, String> xmlMappings = new HashMap<String,String>();
+        File mappingFile = new File(Osa.configFolder+"tika_mappings.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(mappingFile);
+        doc.getDocumentElement().normalize();
+        NodeList nodes = doc.getElementsByTagName("content");
+        for (int i=0; i<nodes.getLength();i++) {
+            Node node = nodes.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                if (node.getAttributes().getNamedItem("type").getNodeValue().equals(contentType)) {
+                    NodeList subNodes = node.getChildNodes();
+                    for (int j = 0;j < subNodes.getLength();j++) {
+                        Node subNode = subNodes.item(j);
+                        if (subNode.getNodeType() == Node.ELEMENT_NODE) {
+                            String osaVal = subNode.getAttributes().getNamedItem("osa").getNodeValue();
+                            String tikaVal = subNode.getAttributes().getNamedItem("tika").getNodeValue();
+                            xmlMappings.put(tikaVal, osaVal);
+                        }
+                    }
+                }
+                
+            }
+        }
+        return xmlMappings;
     }
     
 }

@@ -3,9 +3,12 @@ package fi.mamk.osa.bean;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -347,17 +350,17 @@ public class MetaDataElement implements Serializable {
         return retValue;
     }
 
-	public Vector<LinkedHashMap<String, MetaDataElement>> getNestedElements() {
-		return nestedElements;
-	}
+    public Vector<LinkedHashMap<String, MetaDataElement>> getNestedElements() {
+        return nestedElements;
+    }
 
-	public void setNestedElements(Vector<LinkedHashMap<String, MetaDataElement>> nestedElements) {
-		this.nestedElements = nestedElements;
-	}
-	
-	public void setNestedElement(String name, MetaDataElement nestedElement) {
+    public void setNestedElements(Vector<LinkedHashMap<String, MetaDataElement>> nestedElements) {
+        this.nestedElements = nestedElements;
+    }
+    
+    public void setNestedElement(String name, MetaDataElement nestedElement) {
 
-	    boolean addNewHashMap = false;
+        boolean addNewHashMap = false;
         if (nestedElements.isEmpty()) {
             LinkedHashMap<String, MetaDataElement> lhm = new LinkedHashMap<String, MetaDataElement>();
             lhm.put(name, nestedElement);

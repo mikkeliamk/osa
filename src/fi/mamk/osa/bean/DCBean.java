@@ -21,6 +21,7 @@ public class DCBean extends DataStream {
         Collection,
         Dataset,
         Drawing,
+        Email,
         Event,
         Folder,
         Image,
@@ -41,6 +42,8 @@ public class DCBean extends DataStream {
                 return Dataset;
             else if (Drawing.name().equals(s))
                 return Drawing;
+            else if (Email.name().equals(s))
+                return Email;
             else if (Event.name().equals(s))
                 return Event;
             else if (Folder.name().equals(s))
